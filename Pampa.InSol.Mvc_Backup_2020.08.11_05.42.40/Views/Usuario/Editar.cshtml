@@ -1,0 +1,135 @@
+﻿@using System.Web.Mvc.Ajax;
+@using System.Web.Mvc.Html;
+@using Kendo.Mvc.UI;
+
+@model Pampa.InSol.Entities.Usuario
+
+@{
+    ViewBag.Title = "Editando usuario: "; // +@model.UsuarioNT;
+}
+
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Seguridad</a></li>
+    <li><a href="#">Administración de usuarios</a></li>
+    <li class="active">Editar usuario</li>
+</ol>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <h3 class="titlePage">Editar usuario</h3>
+    <div class="row">
+        <div class="col-md-12 contentUser">
+            <fieldset>
+                @Html.Hidden("ModificadoPor", ContextoUsuarioActual.Current.UserName)
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.CreadoPor)
+                <div class="contentLight">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="userEdit">
+                                <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+                                Usuario: <span class="nameUserEdit">@Model.UsuarioNT.ToUpper()</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.UsuarioNT)
+                            @Html.TextBoxFor(model => model.UsuarioNT, new { @class = "form-style" })
+                            @Html.ValidationMessageFor(model => model.UsuarioNT)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Nombre)
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-style" })
+                            @Html.ValidationMessageFor(model => model.Nombre)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Apellido)
+                            @Html.TextBoxFor(model => model.Apellido, new { @class = "form-style" })
+                            @Html.ValidationMessageFor(model => model.Apellido)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Activo)
+                            @Html.TextBoxFor(model => model.Activo, new { @class = "form-style" })
+                            @Html.ValidationMessageFor(model => model.Activo)
+                        </div>
+                        <div class="col-md-3">
+                            <label>Roles</label>
+                            @(Html.Kendo().MultiSelect()
+                        .Name("rols")
+                        .HtmlAttributes(new { style = "width: 24em;" })
+                        .Placeholder("Roles del usuario")
+                        .BindTo(ViewBag.RolsList)
+                        .Value(Model.Rol.Select(x => x.Descripcion))
+                            )
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="btn-Operation">
+
+                            @(Html.Kendo().Button()
+            .Name("btnGrabar")
+            .HtmlAttributes(new
+            {
+                type = "submit",
+                @class = "k-button k-primary add-button right",
+            })
+            .Content("<span class='glyphicon glyphicon-floppy-disk'></span> Grabar")
+
+                            )
+
+                            @Html.ActionLink("Cancelar", "Index", "Usuario", null, new { @class = "btn k-button btn-link right" })
+                        </div>
+                    </div>
+                </div>      
+</fieldset>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+
+    if ($('.bootstrap-switch-container').length) {
+        $('.bootstrap-switch-container').click(function () {
+            var jthis = $(this);
+            if (jthis.find("input").length) {
+                var input = jthis.find("input")[1];
+                input.value = jthis.has(".bootstrap-switch-on").length > 0 ? 1 : 0; //El que cambia de clase es un DIV que se genera por js dinamicamente y no el DIV .bootstrap-switch-container
+                $('#Activo').val(input.value);
+            }
+        });
+    }
+
+    $(function () {
+        $('#UsuarioNT').blur(function () { //Consulta los datos del usuairo en el Active Directory
+            var name = $('#UsuarioNT').val();
+            var returnVal = false;
+            $.ajax({
+                url: "@Url.Content("~/Usuario/ConsultaUsuarioAD/")" + name,
+                type: 'GET',
+                cache: false
+            }).done(function (data) {
+                if (data.success == false) {
+                    showErrorNotification("No se pudieron conseguir los datos del AD");
+                }
+                else {
+                    $('#Nombre').val(data.Nombre);
+                    $('#Apellido').val(data.Apellido);
+                    showSuccessNotification('Nuevo usuario', 'Se obtuvieron los datos del AD');
+                }
+            });
+
+            return returnVal;
+        });
+    })
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

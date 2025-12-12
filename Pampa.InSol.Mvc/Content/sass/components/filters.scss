@@ -1,0 +1,120 @@
+//Estilos input
+.form-width{  
+            width: 100%!important;
+            max-width: 100%!important;
+}
+.form-style{  
+            border: 1px solid #ceced2;
+            border-radius: 4px;
+            height: 30px;
+            padding-left: 5px;
+            width: 100%!important;
+            max-width: 100%!important;
+}
+
+
+.bnt-filter{
+    width: 100%;
+    background: $bg-header-seccion;
+    text-align: left;
+    color: $second-color;
+    border: none;
+    padding: 8px 12px;
+    margin-top: 8px;
+    &.collapsed:before {
+         font-family:'Glyphicons Halflings';
+         content:"\e114";
+         float:right;
+    }
+    &:before {
+         font-family:'Glyphicons Halflings';
+         content:"\e113";
+         float:right;
+    }
+}
+
+
+.filterContent{
+    background: $bg-seccion;
+    float: left;
+    border: 1px solid #d0d0d0;
+    padding: 15px 0 0 0;
+    width: 100%;
+    .k-content{
+        float: left;
+        background: none;
+        width: 100%;
+    }
+}
+
+#fieldlist{
+    margin: 0;
+    padding: 0;
+    li{
+        list-style: none;
+        text-align: left;
+        margin-bottom: 8px;
+    }
+    label{
+        display: block;
+        padding-bottom: .3em;
+        font-weight: bold;
+        font-size: 12px;
+    }
+}
+
+.k-combobox .k-state-hover, .k-dropdown-wrap.k-state-default, .k-dropdown-wrap{
+    background: white !important;
+}
+
+.k-combobox .k-select{
+    background: #F3F3F4 !important;
+}
+
+.k-list > .k-state-selected.k-state-focused{
+    background: $first-color!important;
+}
+
+.k-widget.k-datetimepicker.k-header{
+    width: 100%;
+}
+
+.k-picker-wrap.k-state-default{
+    input{
+    width: 100%;
+    max-width:100%;
+    }
+}
+.k-list-filter .k-textbox {
+    width: 100%;
+    max-width:100%;
+    }
+.k-state-selected{
+    background-color: $first-color!important;
+    border-color: $first-color!important;
+}
+.k-calendar .k-today .k-link {
+    color: $second-color!important;
+}
+.k-calendar .k-today {
+    -webkit-box-shadow: inset 0 0 0 1px  $first-color;
+    box-shadow: inset 0 0 0 1px  $first-color;
+}
+.k-radio:checked+.k-radio-label:after {
+    background-color:  $first-color!important;
+}
+.k-select {
+    border-radius: 0 4px 4px 0!important;
+}
+
+.k-widget.k-multiselect.k-header{
+    width:100%!important;
+}
+.btn-filter{
+    border-top: 1px solid #cacaca!important;
+    background: #e0e0e0!important;
+    padding: 8px 15px;
+}
+.fa-file-excel-o{
+    margin-right: 5px;
+}

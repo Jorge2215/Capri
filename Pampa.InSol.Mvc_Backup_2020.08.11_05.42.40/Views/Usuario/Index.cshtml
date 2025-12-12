@@ -1,0 +1,197 @@
+﻿@using System.Web.Mvc.Html;
+@using Kendo.Mvc.UI;
+
+
+@model Pampa.InSol.Entities.Usuario
+
+@{
+    ViewBag.Title = "Usuarios";
+}
+
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Seguridad</a></li>
+    <li class="active">Administración de usuarios</li>
+</ol>
+
+<div class="row">
+    <div class="col-md-10 col-sm-6 col-xs-12">
+        <h3 class="titlePage">Administración de Usuarios</h3>
+    </div>
+    <div class="col-md-2 col-sm-6 col-xs-12">
+        <a href="@Url.Action("Crear")" class="k-button k-primary add-button right">Nuevo usuario</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="contentGrid">
+
+            @(Html.Kendo().Grid<Pampa.InSol.Entities.Usuario>()
+        .Name("grid")
+        .Editable(editable => editable.Mode(GridEditMode.InCell))
+
+        .Columns(columns =>
+        {
+        columns.Template(@<text>@Html.ActionLink("Modificar", "Editar", "Usuario", new { id = @item.Id })</text>)
+                            .ClientTemplate("<a href='" + @Url.Content("~/Usuario/Editar") + "/#= Id#' class='fui-new' title='Modificar'><i class='glyphicon glyphicon-edit'></i></a>")
+                            .Title("").Width(32);
+            columns.Bound(c => c.Nombre).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
+            columns.Bound(c => c.Apellido).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
+            columns.Bound(c => c.UsuarioNT).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
+            columns.Bound(c => c.Activo).ClientTemplate("<input type='checkbox' onclick='return editCurrentCell(#= Id#)'  name='Activo' #= Activo? checked='checked' : '' # />");
+        })
+        .HtmlAttributes(new { style = "height: 380px;" })
+        .Scrollable()
+        .Sortable()
+        .Filterable(filterable => filterable
+                    .Extra(false)
+                    .Messages(m => m.Info("Items que tengan el valor:"))
+                    .Operators(operators => operators
+                                .ForString(str => str.Clear()
+                                .Contains("Contiene"))))
+        .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .ButtonCount(5))
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .Model(model =>
+        {
+            model.Id(c => c.Id);
+            model.Field(c => c.Nombre).Editable(false);
+            model.Field(c => c.Apellido).Editable(false);
+            model.Field(c => c.UsuarioNT).Editable(false);
+        })
+        .Read(read => read.Action("Users_Read", "Usuario"))
+        .Create(update => update.Action("Users_Create", "Usuario"))
+        .Update(update => update.Action("EditingInline_Update", "Usuario"))
+        .Filter(filters => filters.Add(c => c.Activo).IsGreaterThan(0))
+        )
+    //.Events(events =>
+    //{
+    //    //events.FilterMenuInit("onFilterMenuInit");
+    //    //events.Edit("onGridEditing");
+    //}
+    //)
+            )
+        </div>
+    </div>
+</div>
+
+
+@*<style>
+        #clientsDb {
+            width: 90%;
+            height: 100%;
+            margin: 20px auto 0;
+            padding: 51px 4px 0 4px;
+            background: url('@Url.Content("~/content/web/grid/clientsDb.png")') no-repeat 0 0;
+        }
+
+          .checkbox-ontainer
+          {
+            max-height: 200px;
+            overflow:auto;
+          }
+    </style>*@
+
+<script>
+    function editCurrentCell(usrId) {
+        var returnVal = false;
+
+        $.ajax({
+            url: "@Url.Content("~/Usuario/DisableEnableUser/")" + usrId,
+            type: 'POST',
+            cache: false,
+            success: function (data) {
+                showSuccessNotification('Cambio de estado', 'Se le cambio el estado al usuario');
+                returnVal = true;
+                location.reload(true);
+            }, //success: function (data)
+            error: function (data) {
+                showErrorNotification("Error al cambiar estado del Usuario");
+            } //success: function (data)
+        });
+
+        return returnVal;
+    }
+
+    //function onFilterMenuInit(e) {
+    //    var firstValueDropDown = e.container.find("select:eq(0)").data("kendoDropDownList");
+
+    //    setTimeout(function () {
+    //        firstValueDropDown.wrapper.hide();
+    //    });
+
+    //    var ddl = e.container.find("[data-role='dropdownlist']:first").getKendoDropDownList()
+    //    if (e.field == "Activo") {
+    //        initCheckboxFilter.call(this, e);
+    //    }
+    //}
+
+    //function initCheckboxFilter(e) {
+
+    //    var popup = e.container.data("kendoPopup");
+    //    var dataSource = this.dataSource;
+    //    var field = e.field;
+    //    var checkboxesDataSource = new kendo.data.DataSource({
+    //        data: uniqueForField(dataSource.data(), field)
+    //    });
+
+    //    var helpTextElement = e.container.children(":first").children(":first");
+    //    helpTextElement.nextUntil(":has(.k-button)").remove();
+    //    var element = $("<div class='checkbox-container'></div>").insertAfter(helpTextElement).kendoListView({
+    //        dataSource: checkboxesDataSource,
+    //        template: "<div><input type='checkbox' value='#:" + field + "#'/>#:" + field + "#</div>"
+    //    });
+    //    e.container.find("[type='submit']").click(function (e) {
+    //        e.preventDefault();
+    //        e.stopPropagation();
+    //        var filter = dataSource.filter() || { logic: "and", filters: [] };
+    //        var fieldFilters = $.map(element.find(":checkbox:checked"), function (input) {
+    //            return {
+    //                field: field,
+    //                operator: "eq",
+    //                value: input.value
+    //            };
+    //        });
+    //        if (fieldFilters.length) {
+    //            removeFiltersForField(filter, field);
+    //            filter.filters.push({
+    //                logic: "or",
+    //                filters: fieldFilters
+    //            });
+    //            dataSource.filter(filter);
+    //        }
+    //        popup.close();
+    //    });
+    //}
+
+    //function removeFiltersForField(expression, field) {
+    //    if (expression.filters) {
+    //        expression.filters = $.grep(expression.filters, function (filter) {
+    //            removeFiltersForField(filter, field);
+    //            if (filter.filters) {
+    //                return filter.filters.length;
+    //            } else {
+    //                return filter.field != field;
+    //            }
+    //        });
+    //    }
+    //}
+
+    function uniqueForField(data, field) {
+        var map = {};
+        var result = [];
+        var item;
+        for (var i = 0; i < data.length; i++) {
+            item = data[i];
+            if (!map[item[field]]) {
+                result.push(item.toJSON());
+                map[item[field]] = true;
+            }
+        }
+        return result;
+    }
+</script>

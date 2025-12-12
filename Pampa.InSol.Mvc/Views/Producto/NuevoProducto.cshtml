@@ -1,0 +1,822 @@
+﻿@using Pampa.InSol.Common.Recursos
+@using Kendo.Mvc.UI;
+@using Pampa.InSol.Biz.Seguridad;
+@model Pampa.InSol.Entities.Models.ProductoModel
+
+
+@{
+    if (Model.Id == 0)
+    {
+        ViewBag.Title = Pampa.InSol.Common.Recursos.General.TitleAdminProductNew;
+    }
+    else
+    {
+        ViewBag.Title = Pampa.InSol.Common.Recursos.General.TitleAdminProductEdit;
+    }
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@if (Model.Id == 0)
+{
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink(Pampa.InSol.Common.Recursos.General.TitleAdminProductConsult, "Index", "Producto")</li>
+        <li class="active">@Pampa.InSol.Common.Recursos.General.TitleAdminProductNew</li>
+    </ol>
+
+    <h4>@Pampa.InSol.Common.Recursos.General.TitleAdminProductNew</h4>
+}
+else
+{
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink(Pampa.InSol.Common.Recursos.General.TitleAdminProductConsult, "Index", "Producto")</li>
+        <li class="active">@Pampa.InSol.Common.Recursos.General.TitleAdminProductEdit</li>
+    </ol>
+
+    <h4>@Pampa.InSol.Common.Recursos.General.TitleAdminProductEdit</h4>
+}
+
+<div class="demo-section">
+    @(Html.Kendo().TabStrip()
+        .Name("tabstrip")
+        .Animation(animation => animation.Open(effect => effect.Fade(FadeDirection.In)))
+        .Items(tabstrip =>{
+                tabstrip.Add().Text("Producto")
+                .Selected(true)
+                .Content(
+                @<text>
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label>ID Producto:</label>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    @(Html.Kendo().TextBox().Name("IDProducto").Value(Model.Id.ToString()).HtmlAttributes(new { required = true, readOnly = true }))
+                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="col-lg-3 text-right">
+                                                    <label>Activo:</label>
+                                                </div>
+                                                <div class="col-lg-3 text-right">
+                                                    @(Html.Kendo().Switch().Name("Activo").HtmlAttributes(new { @class = "pull-right" }).Checked(Model.Activo).Messages(c => c.Checked(General.Si).Unchecked(General.No)))
+                                                </div>
+                                                <div class="col-lg-3 text-right">
+                                                    <label>Sox:</label>
+                                                </div>
+                                                <div class="col-lg-3 text-right">
+                                                    @(Html.Kendo().Switch().Name("chkSox").HtmlAttributes(new { @class = "pull-right" }).Checked(Model.Sox).Messages(c => c.Checked(General.Si).Unchecked(General.No)))
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <label>Nombre:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    @(Html.Kendo().TextBox().Name("Nombre").Value(Model.Nombre).HtmlAttributes(new { required = true, style = "width: 100%" }))
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <label>Plataforma:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    @(Html.Kendo().DropDownListFor(c => c.IdPlataforma).Name("selProductoPlataforma")
+                                                        .HtmlAttributes(new { @class = "form-width" })
+                                                        .DataValueField("Id")
+                                                        .DataTextField("Descripcion")
+                                                        .Filter("contains")
+                                                        .ValuePrimitive(false)
+                                                        .DataSource(source => source.Read(read => read.Action("GetListItemProductosPlataforma", "Producto")))
+                                                        )
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="row">
+                                                <div class="col-lg-12 radioBox">
+                                                    <ul style="margin-bottom:0">
+                                                        <li>@(Html.Kendo().RadioButton().Name("EsProducto").Label("Producto").Checked(!Model.EsPlataforma).HtmlAttributes(new { @name = "esPlataforma" })) </li>
+                                                        <li>@(Html.Kendo().RadioButton().Name("EsPlataforma").Label("Plataforma").Checked(Model.EsPlataforma).HtmlAttributes(new { @name = "esPlataforma" })) </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="radioBox">
+                                                <ul class="fieldlist">
+                                                    <li>
+                                                        @(Html.Kendo().RadioButton().Name("OnPremise").Label("On Premise").Checked(Model.Modo == "P" ? true : false).HtmlAttributes(new { @name = "modo" }))
+                                                    </li>
+                                                    <li>
+                                                        @(Html.Kendo().RadioButton().Name("Cloud").Label("Cloud").Checked(Model.Modo == "C" ? true : false).HtmlAttributes(new { @name = "modo" }))
+                                                    </li>
+                                                    <li>
+                                                        @(Html.Kendo().RadioButton().Name("Hibrido").Label("Híbrido").Checked(Model.Modo == "H" ? true : false).HtmlAttributes(new { @name = "modo" }))
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <label>Tipo:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    @(Html.Kendo().DropDownListFor(c => c.IdTipo).Name("selTipoProducto")
+                                                        .HtmlAttributes(new { @class = "form-width" })
+                                                        .DataValueField("Id")
+                                                        .DataTextField("Descripcion")
+                                                        .Filter("contains")
+                                                        .ValuePrimitive(false)
+                                                        .DataSource(source => source.Read(read => read.Action("GetListItemTipoProducto", "TipoProducto")))
+                                                        )
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="row">
+                                                <div class="col-lg-3 text-left">
+                                                    <label>Tiene acceso Internet:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    @(Html.Kendo().Switch().Name("AccesoInternet").HtmlAttributes(new { @class = "pull-right" }).Checked(Model.AccesoInternet).Messages(c => c.Checked(General.Si).Unchecked(General.No)))
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <label>Servicio:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    @(Html.Kendo().DropDownListFor(c => c.IdServicio).Name("selServicio")
+                                                        .HtmlAttributes(new { @class = "form-width" })
+                                                        .DataValueField("Id")
+                                                        .DataTextField("Descripcion")
+                                                        .Filter("contains")
+                                                        .ValuePrimitive(false)
+                                                        .DataSource(source => source.Read(read => read.Action("GetListItemServicio", "Servicio")))
+                                                        )
+                                                </div>
+                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-bottom:2%">
+                                        <label style="font-size: 14px">Módulos</label>
+                                        @if (Request.HasPermission((int)Security.Funciones.Producto_ABM))
+                                        {
+                                            <input id="btnAddModulo" type="button" class="k-button second-button add-button k-primary" value="Nuevo Módulo" />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row style=" margin-bottom:2%"">
+                                <div class="grid-container">
+                                    @(Html.Kendo().Grid<Pampa.InSol.Entities.Models.ProductoModuloModel>()
+                                        .Name("gridModulos")
+                                        .Columns(columns =>
+                                            {
+                                                columns.Bound(c => c.Nombre).Title("Nombre");
+                                                columns.Bound(c => c.Descripcion).Title("Descripción");
+                                                if (Request.HasPermission((int)Security.Funciones.Producto_ABM))
+                                                {
+                                                    columns.Template(e => { }).ClientTemplate("#= changeEstadoTemplate(data) #").Width(37);
+                                                }
+                                            })
+                                        //.Scrollable(sc => sc.Endless(true))
+                                        //.Sortable()
+                                        //.Selectable()
+                                        .Scrollable(scrollable => scrollable.Virtual(true))
+                                        .HtmlAttributes(new { style = "height: 175px;" })
+                                        .AutoBind(true)
+                                        //.Pageable(pageable => pageable
+                                        //     .Numeric(false)
+                                        //     .Input(true)
+                                        //     .PreviousNext(true)
+                                        //)
+                                        .DataSource(dataSource => dataSource
+                                            .Ajax()
+                                            .Read(read => read.Action("GetProductoModulos", "Producto", new { idProducto = Model.Id }).Data("newProducto.getListaModulos"))
+                                            //.PageSize(3)
+                                            )
+                                        .NoRecords(Pampa.InSol.Common.Recursos.General.NoRecords)
+                                        )
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-lg-1"></div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-2 col-xs-4">
+                                            <label>Descripción:</label>
+                                        </div>
+                                        <div class="col-lg-8 col-md-10 col-xs-10">
+                                                @*@(Html.Kendo().TextBox().Name("Descripcion").Value(Model.Descripcion).HtmlAttributes(new { required = true, style = "width: 100%" }))*@
+                                                @Html.TextArea("Descripcion", Model.Descripcion, new { @class = "k-textarea k-input-inner", rows = "7", style = "width: 100%;" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 col-xs-4">
+                                            <label>Sitio de Hosting:</label>
+                                        </div>
+                                        <div class="col-md-8 col-xs-12">
+                                            @(Html.Kendo().DropDownListFor(c => c.IdSitio).Name("selSitio")
+                                                .HtmlAttributes(new { @class = "form-width" })
+                                                .DataValueField("Id")
+                                                .DataTextField("Descripcion")
+                                                .Filter("contains")
+                                                .ValuePrimitive(false)
+                                                .DataSource(source => source.Read(read => read.Action("GetListItemSitio", "Sitio")))
+                                                )
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 col-xs-4">
+                                            <label>Obsolescencia:</label>
+                                        </div>
+                                        <div class="col-md-8 col-xs-12">
+                                            @(Html.Kendo().DropDownListFor(c => c.IdObsolescencia)
+                                                .Name("selObsolescencia")
+                                                .HtmlAttributes(new { @class = "form-width" }) //required = true, ?
+                                                .DataValueField("Id")
+                                                .DataTextField("Descripcion")
+                                                .Filter("contains")
+                                                .ValuePrimitive(false)
+                                                .DataSource(source => source.Read(read => read.Action("GetListItemObsolescencia", "Obsolescencia")))
+                                                )
+                                        </div>
+                                    </div>
+                                    <div class="row" style="padding-top:15px;">
+                                        <div class="col-md-4 col-xs-4">
+                                            <label for="cicloAplicativo">Ciclo Aplicativo:</label>
+                                        </div>
+                                        <div class="col-md-8 col-xs-10">
+                                            @(Html.Kendo().DropDownListFor(c => c.IdCicloAplicativo)
+                                                .Name("selCicloAplicativo")
+                                                .HtmlAttributes(new { @class = "form-width" })
+                                                .DataValueField("Id")
+                                                .DataTextField("Descripcion")
+                                                .Filter("contains")
+                                                .ValuePrimitive(false)
+                                                .DataSource(source => { source.Read(read =>{read.Action("GetListItemCicloAplicativo", "CicloAplicativo");});})
+                                                )
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 col-xs-4">
+                                            <label for"Proceso">Proceso:</label>
+                                        </div>
+                                        <div class="col-md-8 col-xs-10">
+                                            @(Html.Kendo().MultiSelect().Name("cmbProceso").Placeholder("Seleccione el Proceso...").Enable(false).DataTextField("Descripcion").DataValueField("Id").AutoBind(false).Value(Model.Procesos).DataSource(source => source.Read(read => read.Action("GetProcesosFiltered", "Producto").Data("getIdCiclo")).ServerFiltering(true)))
+                                        </div>
+                                    </div>
+                                <div class="row">
+                                    <div class="col-md-4 col-xs-4">
+                                        <label>Negocio:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.Kendo().MultiSelect().Name("cmbNegocio").Placeholder("Seleccione el Negocio...").Enable(false).DataTextField("Descripcion").DataValueField("Id").AutoBind(false).Value(Model.Negocios).DataSource(
+                                            source => source.Read(read => read.Action("GetNegocios", "Producto")).ServerFiltering(true))
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-top:15px;">
+                                    <div class="col-md-4 col-xs-4">
+                                        <label>Gerencia TI:</label>
+                                    </div>
+                                    <div class="col-md-8 col-xs-10">
+                                        @(Html.Kendo().TextBoxFor(c => c.Gerencia).Name("txtGerencia").HtmlAttributes(new { required = true, @class = "form-width" })
+                                        )
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 col-xs-4">
+                                        <label>Jefatura TI:</label>
+                                    </div>
+                                    <div class="col-md-8 col-xs-10">
+                                        @(Html.Kendo().TextBoxFor(c => c.JefaturaTI).Name("txtJefaturaTI").HtmlAttributes(new { required = true, @class = "form-width" })
+                                        )
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 col-xs-4">
+                                        <label>Resp. TI:</label>
+                                    </div>
+                                    <div class="col-md-8 col-xs-10">
+                                        @(Html.Kendo().TextBoxFor(c => c.RespTI).Name("RespTI").HtmlAttributes(new { required = true, @class = "form-width" })
+                                        )
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 col-xs-4">
+                                        <label>Resp. Negocio:</label>
+                                    </div>
+                                    <div class="col-md-8 col-xs-12">
+                                        @(Html.Kendo().TextBoxFor(c => c.RespNegocio).Name("RespNegocio").HtmlAttributes(new { required = true, @class = "form-width" })
+                                        )
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 col-xs-4">
+                                        <label>Mesa Resp:</label>
+                                    </div>
+                                    <div class="col-md-8 col-xs-12">
+                                        @(Html.Kendo().TextBoxFor(c => c.RespMesa).Name("RespMesa").HtmlAttributes(new { required = true, @class = "form-width" })
+                                        )
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </text>
+                );
+                tabstrip.Add().Text("Ambientes")
+                .Content(
+                @<text>
+                    <div class="contentLightAmbientes">
+                        <div class="row">
+                            <div id="divAmbiente" >
+                                @(Html.Kendo().Grid<Pampa.InSol.Entities.Models.ProductoAmbienteModel>()
+                                    .Name("gridAmbientes")
+                                    .Columns(columns =>
+                                    {
+                                        columns.Bound(c => c.Id).Hidden();
+                                        if (Request.HasPermission((int)Security.Funciones.Producto_ABM))
+                                        {
+                                        columns.Template(e => { }).ClientTemplate("#= EditarAmbiente(data) #").Width(40).HtmlAttributes(new { style = "text-align: center" });
+                                        columns.Command(c => c.Destroy().Text(" ").IconClass("glyphicon glyphicon-trash").HtmlAttributes(new { @class ="k-button second-button"})).Width(40);
+                                        }
+                                        columns.Bound(c => c.RolAmbiente.Descripcion).Title("Rol").HtmlAttributes(new { style = "text-align: center" }).Width(60);
+                                        columns.Bound(c => c.Server).Title("Servidor");
+                                        columns.Bound(c => c.Nombre).Title("Nombre");
+                                        columns.Bound(c => c.Usuario).Title("Usuario");
+                                        columns.Bound(c => c.UsuarioEmer).Title("Usu.Emergencia");
+                                        columns.Bound(c => c.Comentario).Title("Comentario").HtmlAttributes(new { style = "text-align: right;" });
+                                    })
+                                    .Editable(e => e.DisplayDeleteConfirmation("Se va a eliminar el ambiente. ¿Desea continuar?"))
+                                    ////.Scrollable(c => c.Height("fit-content"))
+                                    .Resizable(x => x.Columns(true))
+                                    .AutoBind(false)
+                                    .Pageable(pageable => pageable
+                                        .Numeric(false)
+                                        .Input(true)
+                                        .PreviousNext(true))
+                                    .Events( e=> e.DataBound("onDataBinding"))
+                                    .DataSource( dataSource =>
+                                        dataSource
+                                        .Ajax()
+                                        .Batch(true)
+                                        .Model(model =>
+                                            {
+                                                model.Id(p => p.Id);
+                                            }
+                                        )
+                                        .Sort(s => s.Add(c => c.Ambiente.Orden).Ascending())
+                                        .Group(g => g.Add(c => c.Ambiente.Orden))
+                                        .Read(read => read.Action("AmbientesByProducto_Read", "ProductoAmbiente").Data("newProducto.getFilterIdProducto"))
+                                        .Destroy("AmbientesByProducto_Delete", "ProductoAmbiente")
+                                        .PageSize(10)
+                                        )
+                                   .NoRecords(Pampa.InSol.Common.Recursos.General.NoRecords)
+                                   )
+                            </div>
+                        </div>
+                        @if (Request.HasPermission((int)Security.Funciones.Producto_ABM))
+                        {
+                        <div id="formAmbiente">
+                            <div class="row" id="editAmbiente">
+                                <div class="col-lg-3">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label class="marginLeftLabel">Ambiente:</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            @(Html.Kendo().DropDownListFor(c => c.ProductoAmbiente.Ambiente.Id)
+                                                .Name("selAmbiente")
+                                                .HtmlAttributes(new { @class = "form-width" })
+                                                .DataValueField("Id")
+                                                .DataTextField("Descripcion")
+                                                .Filter("contains")
+                                                .ValuePrimitive(false)
+                                                .DataSource(source => source.Read(read => read.Action("GetAmbientes", "Producto")))
+                                                )
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label class="marginLeftLabel">Server:</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            @(Html.Kendo().TextBoxFor(c => c.ProductoAmbiente.Server).Name("Server").HtmlAttributes(new { required = true, @class = "form-width" })
+                                            )
+                                        </div>
+                                     </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label class="marginLeftLabel">Usuario:</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            @(Html.Kendo().TextBoxFor(c => c.ProductoAmbiente.Usuario).Name("Usuario").HtmlAttributes(new { required = true, @class = "form-width" })
+                                            )
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label class="marginLeftLabel">Rol:</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            @(Html.Kendo().DropDownListFor(c => c.ProductoAmbiente.RolAmbiente.Id)
+                                                .Name("selRolAmbiente")
+                                                .HtmlAttributes(new { @class = "form-width" })
+                                                .DataValueField("Id")
+                                                .DataTextField("Descripcion")
+                                                .Filter("contains")
+                                                .ValuePrimitive(false)
+                                                .DataSource(source => source.Read(read => read.Action("GetListItemRolAmbiente", "RolAmbiente")))
+                                                )
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label class="marginLeftLabel">Nombre:</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            @(Html.Kendo().TextBoxFor(c => c.ProductoAmbiente.Nombre).Name("NombreAmb").HtmlAttributes(new {@class = "form-width" })
+                                            )
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label class="marginLeftLabel">Usuario Emer.:</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            @(Html.Kendo().TextBoxFor(c => c.ProductoAmbiente.UsuarioEmer).Name("UsuarioEmer").HtmlAttributes(new { @class = "form-width" })
+                                            )
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <label class="marginLeftLabel">Comentario:</label>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-xs-8">
+                                            <textarea name="Comentario" id="Comentario" maxlength="4000" style="width:100%" rows="4" class="k-textarea k-input-inner k-widget k-textbox form-width"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="col-lg-4 ">
+                                <div class="row">
+                                    <div class="col-lg-6" style="width:100%; float:right;">
+                                        @if (Model.Id != 0){
+                                            <input id="btnAmbiente" type="button" class="k-button second-button add-button k-primary" style="background:#00bbbb;" value="Agregar" />
+                                         }
+                                         else
+                                         {
+                                            <div id="example">
+                                                <span id="show" background:#00bbbb;" class="k-button second-button add-button k-primary">Agregar</span>
+                                            </div>
+                                            <div id="dialog"></div>
+                                            <div class="responsive-message"></div>
+                                         }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                         }
+</div>
+                </text>
+                );
+                if (Model.Id > 0)
+                {
+                tabstrip.Add().Text("Interfaces")
+                .Content(
+                @<text>
+                <div id="divInterfaces" class="bops-section-production">
+                    @(Html.Kendo().Grid<Pampa.InSol.Entities.Models.InterfazModel>()
+                     .Name("gridInterfaces")
+                     .Columns(columns =>
+                     {
+                        columns.Bound(c => c.Id).Title("Id").Width(55);
+                        columns.Bound(c => c.Nombre).Filterable(ftb => ftb.Multi(true).Search(true));
+                        columns.Bound(c => c.InOut).Title("IN/OUT").Width(95).Filterable(ftb => ftb.Multi(true).Search(true));
+                        columns.Bound(c => c.ProductoOrigenDisplay).Title("Prod. Origen").Filterable(ftb => ftb.Multi(true).Search(true));
+                        columns.Bound(c => c.ModuloOrigenDisplay).Title("Módulo Origen").Filterable(ftb => ftb.Multi(true).Search(true));
+                        columns.Bound(c => c.ProductoDestinoDisplay).Title("Prod. Destino").Filterable(ftb => ftb.Multi(true).Search(true));
+                        columns.Bound(c => c.ModuloDestinoDisplay).Title("Módulo Destino").Filterable(ftb => ftb.Multi(true).Search(true));
+                        columns.Bound(c => c.TipoDatoDisplay).Title("Tipo Dato").Filterable(ftb => ftb.Multi(true).Search(true));
+                        columns.Bound(c => c.FrecuenciaDisplay).Title("Frecuencia").Filterable(ftb => ftb.Multi(true).Search(true));
+                        columns.Bound(c => c.TipoInterfazDisplay).Title("Tipo Interfaz").Filterable(ftb => ftb.Multi(true).Search(true));
+})
+                        .Sortable()
+                        .Scrollable()
+                        .Filterable()
+                        .Resizable(x => x.Columns(true))
+                                    .AutoBind(false)
+                                    .Excel(excel => excel
+                                        .AllPages(true)
+                                        .Filterable(true)
+                                        .FileName(Pampa.InSol.Common.Recursos.General.TitleAdminProducts + ".xlsx")
+                                    )
+                                    .Pageable(pageable => pageable
+                                        .Numeric(false)
+                                        .Input(true)
+                                        .PreviousNext(true)
+                                    )
+                                    .DataSource(dataSource => dataSource
+                                        .Ajax()
+                                        .Read(read => read.Action("InterfacesByProducto_Read", "Interfaz").Data("newProducto.getFilterIdProducto"))
+                                        .PageSize(10)
+                                        )
+                                    .NoRecords(Pampa.InSol.Common.Recursos.General.NoRecords)
+                            )
+                        </div>
+                </text>);
+                }
+            })
+        )
+</div>
+
+
+
+@Html.Partial("PopupAgregarModulo")
+@*@Html.Partial("PopupListaInterfaces")*@
+
+<div id="divButtons" class="bops-sections contentLight">
+    @if (Request.HasPermission((int)Security.Funciones.Producto_ABM))
+    {
+        <input id="btnGuardar" type="button" class="k-button second-button add-button k-primary" value="Guardar" />
+    }
+
+    @Html.ActionLink("Volver", "Index", null, new { @class = "k-button second-button" })
+</div>
+
+    <script id="EditarAmbiente" type="text/x-kendo-template">
+
+        <a class='k-button second-button' onclick='newProducto.EditarAmbiente("#= id #")'  style='float: left;'>
+            <i class='glyphicon glyphicon-pencil'></i>
+        </a>
+    </script>
+
+    <script>
+
+        var EditarAmbiente = kendo.template($('#EditarAmbiente').html());
+
+        function getIdCiclo() {
+            var id = document.getElementById("selCicloAplicativo").value;
+            return {id}
+        }
+
+        function onDataBinding(arg) {
+            
+                arg.sender._groupRows.forEach((row) => {
+                let desc = row.items[0].Ambiente.Descripcion;
+                let aux = Array.from(document.querySelectorAll(".k-grouping-row p")).find(e => e.innerText == row.field + ": " + row.value);
+                aux.childNodes[1].textContent = desc;
+            })
+
+        }
+
+    </script>
+
+<style>
+    #Nombre,
+    #RespMesa,
+    #RespNegocio,
+    #Descripcion,
+    #BaseDevServer,
+    #AppDevPath,
+    #BaseDevBase,
+    #AppDevUrl,
+    #BaseDevUsuario,
+    #BaseDevPassword,
+    #BaseQAServer,
+    #AppQAPath,
+    #BaseQABase,
+    #AppQAUrl,
+    #BaseQAUsuario,
+    #BaseQAPassword,
+    #BasePRODServer,
+    #AppPRODPath,
+    #BasePRODBase,
+    #AppPRODUrl,
+    #BasePRODUsuario,
+    #BasePRODUsuEmer {
+        max-width: 100%;
+    }
+
+    .k-grid .k-grid-content {
+        overflow-y: auto;
+    }
+
+    .k-grid-delete{
+        width:24px;
+        height:24px;
+    }
+    .k-tabstrip .k-animation-container-relative {
+        max-width: 100%;
+    }
+
+    .row {
+        margin-right: 0px;
+        margin-left: 0px;
+        padding: 4px;
+    }
+
+    .contentLightAmbientes {
+        margin-top: 10px;
+        background: #E0E0E0;
+        border: 1px solid #D0D0D0;
+        padding: 15px;
+        border-radius: 4px;
+    }
+    #formAmbiente {
+        background: #ffffff;
+        border: 1px solid #808080;
+        padding: 15px;
+        border-radius: 4px;
+    }
+
+    .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5,
+    .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10,
+    .col-xs-11, .col-xs-12, .col-sm-1, .col-sm-2, .col-sm-3,
+    .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8,
+    .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-md-1,
+    .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6,
+    .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11,
+    .col-md-12, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4,
+    .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9,
+    .col-lg-10, .col-lg-11, .col-lg-12 {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .columnWidth-12 {
+        width: 12%;
+    }
+
+    .columnWidth-10 {
+        width: 10%;
+    }
+
+    .columnWidth-90 {
+        width: 90%;
+    }
+
+    .marginLeftLabel {
+        padding-left: 15px;
+    }
+
+    .radioBox {
+        background-color: #E0E0E0;
+        border-radius: 3px;
+    }
+
+    .radioBox li {
+        list-style: none;
+        padding-bottom: 1em;
+    }
+
+    .fieldlist {
+        margin: 0 0;
+        display: flex;
+    }
+
+    .fieldlist ul li {
+        display: flex;
+        align-items: center;
+    }
+
+    ul {
+        margin: auto;
+        padding-top: 2%;
+    }
+
+    .fieldlist li {
+        list-style: none;
+        margin: auto;
+        align-content: center;
+    }
+
+    .k-radio-label {
+        margin: 0;
+    }
+
+</style>
+
+<script id="changeEstadoTemplate" type="text/x-kendo-template">
+    <button class='k-button second-button' onclick='newProducto.eliminarModulo("#= Nombre #", @Model.Id)'>
+        <i class='glyphicon glyphicon-trash'></i>
+    </button>
+</script>
+<script>
+    var changeEstadoTemplate = kendo.template($('#changeEstadoTemplate').html());
+</script>
+<script>
+
+    $(function () {
+        newProducto.init({
+            IDProducto: @Model.Id,
+            txtNombre: '#Nombre',
+            selCicloAplicativo: '#selCicloAplicativo',
+            selObsolescencia: '#selObsolescencia',
+            selServicio: '#selServicio',
+            selTipoProducto: '#selTipoProducto',
+            selSitio: '#selSitio',
+            chkActivo: '#Activo',
+            txtRespTI: '#RespTI',
+            txtRespNegocio: '#RespNegocio',
+            txtRespMesa: '#RespMesa',
+            txtDescripcion: '#Descripcion',
+
+            chkSox: '#chkSox',
+            txtServicio: '#txtServicio',
+            cmbNegocio: '#cmbNegocio',
+            cmbProceso: '#cmbProceso',
+            txtObsolescencia: '#txtObsolescencia',
+            txtGerencia: '#txtGerencia',
+            txtAgrupador: '#txtAgrupador',
+            txtJefaturaTI: '#txtJefaturaTI',
+            txtTipo: '#txtTipo',
+            txtSitio: '#txtSitio',
+
+            chkEsPlataforma: '#esPlataforma',
+            chkAccesoInternet: '#AccesoInternet',
+            selProductoPlataforma: '#selProductoPlataforma',
+
+            selAmbiente: '#selAmbiente',
+            selRolAmbiente: '#selRolAmbiente',
+            txtServer: '#Server',
+            txtNombreAmb: '#NombreAmb',
+            txtUsuario: '#Usuario',
+            txtUsuarioEmer: '#UsuarioEmer',
+            txtComentario: '#Comentario',
+
+            listaModulosExistentes: @Html.Raw(Json.Encode(ViewBag.listaModulos)),
+
+            btnAddModulo: '#btnAddModulo',
+            gridModulos: '#gridModulos',
+
+            gridAmbientes: '#gridAmbientes',
+            btnAmbiente: '#btnAmbiente',
+            btnEditAmbiente: '#btnEditAmbiente',
+
+            popupAgregarModulo: '#popupAgregarModulo',
+            gridInterfaces: '#gridInterfaces',
+            txtModuloNombre: '#ModuloNombre',
+            txtModuloDescripcion: '#ModuloDescripcion',
+            btnAgregarPopupAgregarModulo: '#btnAgregarPopupAgregarModulo',
+            btnCerrarPopupAgregarModulo: '#btnCerrarPopupAgregarModulo',
+
+            popupListaInterfaces: '#popupListaInterfaces',
+            btnOpenInterfaces: '#btnOpenInterfaces',
+            btnCerrarPopupListaInterfaces: '#btnCerrarPopupListaInterfaces',
+
+            btnGuardar: '#btnGuardar',
+
+            urlSaveProducto: '@Url.Action("Save")',
+            urlIndexProducto: '@Url.Action("Index")',
+            urlDeleteModuloRelacionado: '@Url.Action("DeleteModuloRelacionado")',
+            urlGetProcesos: '@Url.Action("GetProcesosFiltered")',
+            urlAddAmbiente: '@Url.Action("AmbientesByProducto_Create", "ProductoAmbiente")',
+            urlEditProducto: '@Url.Action("Editar/")'
+        })
+    })
+</script>
+@Scripts.Render("~/bundles/NuevoProducto")

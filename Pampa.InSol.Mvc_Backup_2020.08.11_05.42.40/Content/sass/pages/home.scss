@@ -1,0 +1,75 @@
+.panel-button{
+    background: $first-color;
+    margin-bottom: 15px;
+    clear:left;
+    .content-button{
+        text-align: center;
+        i{
+            padding-right: 6px;
+            font-size: 1.5em;
+            color: #FFF;
+        }
+        p{
+            color: #FFF;
+            margin:0;
+        }
+    }
+}
+.date{
+    font-size: 11px;
+    margin: 0;
+   color: $second-color;
+}
+.demo-section.home{
+    background: $bg-content;
+    border: 1px solid #dedee0;
+    padding: 15px;
+    height: 372px;
+    .k-chart, .k-stockchart {
+        height: 300px;
+    }
+}
+.content-text-home{
+    padding:0;
+    .list-group {
+    margin-bottom: 0;
+    }
+    .list-group-item{
+        border-radius: 0!important;
+        border: none;
+        border-bottom: 1px solid #dddddd;
+        background: none;
+        font-size: 12px;
+    }
+    .titleSection{
+    color: $first-color;
+    font-size: 13px;
+    }
+}
+.panel-btn{
+    padding: 15px;
+}
+.pull-left,
+.pull-right{
+    color: $first-color;
+}
+.button-home{
+        text-align: center;
+        margin-bottom: 15px;
+    i{
+        font-size:2em;
+        color: #5d5d5d;
+        padding-bottom:12px;
+        width:100%;
+    }
+    .k-button.k-primary.add-button {
+         margin: 0;
+    }
+    .fa-clipboard{
+    font-size: 1.8em;
+    padding-bottom: 14px;
+    }
+}
+.panel-default{
+    margin-bottom:12px;
+}

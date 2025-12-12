@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Test de erroes</h2>
+
+<a id="testAjax" href="#">Ajax error</a>
+@Html.Hidden("LanzarError", Url.Action("LanzarError", "Error"))
+
+<script>
+    var errorPorAjax = function (e) {
+        e.preventDefault();
+        $.ajax({
+            data: '',
+            type: 'POST',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            url: $('#LanzarError').val(),
+            cache: false,
+            success: function (result) {
+                alert('ERROR!!! NO SE DETECTO ERROR!!');
+            }
+        });
+    }
+
+    $(function () {
+        $('#testAjax').on('click', errorPorAjax);
+    })
+</script>

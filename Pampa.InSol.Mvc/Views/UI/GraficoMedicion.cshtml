@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "GraficoMedicion";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Grafico de medición</h2>
+
+<div id="gauge-container">
+    @*@(Html.Kendo().LinearGauge()
+          .Name("gauge")
+          .Pointer(pointer => pointer
+              .Value(650)
+              .Shape(GaugeLinearPointerShape.Arrow)
+          )
+          .Scale(scale => scale
+              .MajorUnit(100)
+              .MinorUnit(5)
+              .Max(2000)
+              .Ranges(ranges =>
+              {
+                  ranges.Add().From(0).To(100).Color("#000000");
+                  ranges.Add().From(100).To(1400).Color("#0DB21D");
+                  ranges.Add().From(1400).To(1700).Color("#ffc700");
+                  ranges.Add().From(1700).To(1850).Color("#ff7a00");
+                  ranges.Add().From(1850).To(2000).Color("#c20000");
+              }
+              )
+          )
+          .HtmlAttributes(new { style = "width:200px;" })
+    )*@
+</div>

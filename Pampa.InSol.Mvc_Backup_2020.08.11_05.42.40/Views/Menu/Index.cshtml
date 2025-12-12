@@ -1,0 +1,21 @@
+﻿<div class="content-wrapper demo-content-wide">
+    <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-04">
+                <span class="sr-only">Toggle navigation</span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-04">
+            <nav>
+                <ul id="menu" class="nav navbar-nav">
+                    <li class="@Html.ActivePage("Home", "Index")">
+                        @Html.ActionLink("Home", "Index", "Home")
+                    </li>
+                    <li class="@Html.ActivePage("Usuario", "Index")">
+                        @Html.ActionLink("Usuarios", "Index", "Usuario")
+                    </li>
+                </ul>
+            </nav>
+        </div><!-- /.navbar-collapse -->
+    </nav><!-- /navbar -->
+</div>

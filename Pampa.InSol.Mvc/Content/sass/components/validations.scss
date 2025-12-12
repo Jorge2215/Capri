@@ -1,0 +1,136 @@
+/*Validator*/
+span.k-widget.k-tooltip-validation {
+    display: none!important;
+    width: 160px;
+    text-align: left;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background: none;
+    box-shadow: none;
+    color: #CC6563;
+}
+
+.k-tooltip-validation .k-warning {
+    display: none;
+}
+
+.k-input.k-valid {
+    border: 1px solid red;
+}
+
+//NOTIFICATION -------------------------------
+
+// SUCCESS notification template
+.k-widget.k-notification.k-notification-success {
+    background-color: $success-bg!important;
+    color: $success-color!important;
+    border-color: $success-border!important;
+}
+// INFO notification template
+.k-widget.k-notification.k-notification-info {
+    background-color: $info-bg!important;
+    color: $info-color!important;
+    border-color: $info-border!important;
+}
+// ALERT notification template
+.k-widget.k-notification.k-notification-alert {
+    background-color: $alert-bg!important;
+    color: $alert-color!important;
+    border-color: $alert-border!important;
+}
+
+// ERROR notification template 
+.k-widget.k-notification.k-notification-error {
+        background-color: $error-bg!important;
+        border-color: $error-border!important;
+        color: $error-color!important;
+}
+
+.notificationStyle {
+        width: 268px;
+        height: auto;
+        min-height: 60px;
+        padding: 15px;
+        border-radius: 4px;
+    &.success-notification{
+        background-color:$success-bg!important;
+    }
+    &.info-notification{
+        background-color:$info-bg!important;
+    }
+    &.alert-notification{
+        background-color:$alert-bg!important;
+        span{
+            padding-top:4px;
+        }
+    }
+    &.error-notification{
+        background-color:$error-bg!important;
+    }
+    span{
+        float: left;
+        font-size: 1.5em;
+    } 
+    h3 {
+        font-size: 1.2em;
+        font-weight: bolder;
+        line-height: 0em;
+        top: 10px;
+        position: absolute;
+        left: 45px;
+    }
+    p{
+        margin-top: 32px;
+    }
+}
+
+
+// Alert validation template 
+.k-notification-alertStyle{
+        background-color: $alert-bg!important;
+        border: 1px solid $alert-border!important;
+        color: $alert-color!important;
+}
+
+
+
+// Error validation template 
+.k-notification-errorStyle,
+.k-invalid{
+        background-color: $error-bg!important;
+        border-color:$error-border!important;
+        color: $error-color!important;
+}
+.demo-section{
+    margin-bottom: 8px;
+}
+
+.k-notification-wrap{
+    .k-i-note {
+        display:none;
+    }
+    ul{
+        margin: 0;
+        padding-left: 15px;
+    }
+}
+
+.widget-validation-error{
+border: 1px solid $error-border !important;
+    .k-select{
+        background-color: $error-bg!important;
+        border-left: 1px solid $error-border !important;
+    }
+    .k-formatted-value{
+        background-color: $error-bg!important;
+    }
+}
+
+
+
+
+//disable
+input[readonly]{
+    background-color: #ebebe4!important;
+}

@@ -1,0 +1,104 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1145
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencias", "Dependencias", "{EC4E9D8B-4871-4D5E-8FF5-118E0266ADF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pampa.InSol.Dal", "Pampa.InSol.Datos\Pampa.InSol.Dal.csproj", "{1AD59EA7-6A81-48F7-8033-2F2BEFEFB7E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pampa.InSol.Biz", "Pampa.InSol.Biz\Pampa.InSol.Biz.csproj", "{D006DE9C-3ED9-4038-909F-92F7B3BDF592}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pampa.InSol.Mvc", "Pampa.InSol.Mvc\Pampa.InSol.Mvc.csproj", "{8ED923CC-15EF-47B3-818F-0BB58FA0E221}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pampa.InSol.IoC", "Pampa.InSol.IoC\Pampa.InSol.IoC.csproj", "{4BCC1BF8-1FE0-4930-884A-3FE26136EC4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pampa.InSol.Biz.Contratos", "Pampa.InSol.Biz.Contratos\Pampa.InSol.Biz.Contratos.csproj", "{5CA9ACED-3B6A-4D80-92E5-E47B28C6E088}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pampa.InSol.Entities", "Pampa.InSol.Entities\Pampa.InSol.Entities.csproj", "{1E1F2EFD-3EB5-45E9-95B7-39A1A33F97FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pampa.InSol.Dal.Contratos", "Pampa.InSol.Dal.Contratos\Pampa.InSol.Dal.Contratos.csproj", "{F34B8246-9E9E-4986-BDB4-3B6BF19E933C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pampa.InSol.Common", "Pampa.InSol.Common\Pampa.InSol.Common.csproj", "{E743E9F7-CDD4-4B3D-B157-03AE3CBF4C62}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{148510CF-C625-447B-92BE-C69DFB416673}"
+	ProjectSection(SolutionItems) = preProject
+		links.txt = links.txt
+		Settings.StyleCop = Settings.StyleCop
+		Test.runsettings = Test.runsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C7A4902C-BAD8-4FF6-9B08-01FFDA2C1929}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Pampa.InSol.Database", "Pampa.InSol.Database\Pampa.InSol.Database.sqlproj", "{2F1B57D6-8790-4EE2-80D9-BB719464A867}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pampa.InSol.Test", "Pampa.InSol.Test\Pampa.InSol.Test.csproj", "{AD4193CD-84AC-4D7E-B5D8-938D902A3056}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pampa.InSol.Infrastructure", "Pampa.InSol.Infrastructure\Pampa.InSol.Infrastructure.csproj", "{45FCBB3E-9034-4550-B655-80D932D038EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1AD59EA7-6A81-48F7-8033-2F2BEFEFB7E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AD59EA7-6A81-48F7-8033-2F2BEFEFB7E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AD59EA7-6A81-48F7-8033-2F2BEFEFB7E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AD59EA7-6A81-48F7-8033-2F2BEFEFB7E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D006DE9C-3ED9-4038-909F-92F7B3BDF592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D006DE9C-3ED9-4038-909F-92F7B3BDF592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D006DE9C-3ED9-4038-909F-92F7B3BDF592}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D006DE9C-3ED9-4038-909F-92F7B3BDF592}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ED923CC-15EF-47B3-818F-0BB58FA0E221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ED923CC-15EF-47B3-818F-0BB58FA0E221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ED923CC-15EF-47B3-818F-0BB58FA0E221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ED923CC-15EF-47B3-818F-0BB58FA0E221}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BCC1BF8-1FE0-4930-884A-3FE26136EC4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BCC1BF8-1FE0-4930-884A-3FE26136EC4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BCC1BF8-1FE0-4930-884A-3FE26136EC4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BCC1BF8-1FE0-4930-884A-3FE26136EC4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CA9ACED-3B6A-4D80-92E5-E47B28C6E088}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CA9ACED-3B6A-4D80-92E5-E47B28C6E088}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CA9ACED-3B6A-4D80-92E5-E47B28C6E088}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CA9ACED-3B6A-4D80-92E5-E47B28C6E088}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E1F2EFD-3EB5-45E9-95B7-39A1A33F97FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E1F2EFD-3EB5-45E9-95B7-39A1A33F97FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E1F2EFD-3EB5-45E9-95B7-39A1A33F97FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E1F2EFD-3EB5-45E9-95B7-39A1A33F97FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F34B8246-9E9E-4986-BDB4-3B6BF19E933C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F34B8246-9E9E-4986-BDB4-3B6BF19E933C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F34B8246-9E9E-4986-BDB4-3B6BF19E933C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F34B8246-9E9E-4986-BDB4-3B6BF19E933C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E743E9F7-CDD4-4B3D-B157-03AE3CBF4C62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E743E9F7-CDD4-4B3D-B157-03AE3CBF4C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E743E9F7-CDD4-4B3D-B157-03AE3CBF4C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E743E9F7-CDD4-4B3D-B157-03AE3CBF4C62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F1B57D6-8790-4EE2-80D9-BB719464A867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F1B57D6-8790-4EE2-80D9-BB719464A867}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F1B57D6-8790-4EE2-80D9-BB719464A867}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2F1B57D6-8790-4EE2-80D9-BB719464A867}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F1B57D6-8790-4EE2-80D9-BB719464A867}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F1B57D6-8790-4EE2-80D9-BB719464A867}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{AD4193CD-84AC-4D7E-B5D8-938D902A3056}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD4193CD-84AC-4D7E-B5D8-938D902A3056}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD4193CD-84AC-4D7E-B5D8-938D902A3056}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD4193CD-84AC-4D7E-B5D8-938D902A3056}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45FCBB3E-9034-4550-B655-80D932D038EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45FCBB3E-9034-4550-B655-80D932D038EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45FCBB3E-9034-4550-B655-80D932D038EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45FCBB3E-9034-4550-B655-80D932D038EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45
+		SolutionGuid = {7B7646EF-1411-4054-9DF3-FFAEFD6D9770}
+	EndGlobalSection
+EndGlobal

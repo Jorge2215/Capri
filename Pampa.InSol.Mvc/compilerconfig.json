@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "Content/sass/Site.css",
+    "inputFile": "Content/sass/Site.scss"
+  },
+  {
+    "outputFile": "Content/sass/pages/pampa.css",
+    "inputFile": "Content/sass/pages/pampa.scss"
+  },
+  {
+    "outputFile": "Content/sass/components/grid.css",
+    "inputFile": "Content/sass/components/grid.scss"
+  }
+]

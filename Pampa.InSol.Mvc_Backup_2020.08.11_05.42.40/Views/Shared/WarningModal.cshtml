@@ -1,0 +1,15 @@
+﻿@using Recurso = Pampa.InSol.Common.Recursos.General    
+
+@(Html.Kendo().Window()
+        .Name("warning")
+        .Actions(actions => actions.Close())
+        .Visible(false)
+    )
+    <script id="modal-warning" type="text/x-kendo-template">
+        <div class="modal-body">
+            <p id="msgwarning" class="warning-message"></p>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-cancel k-button second-button">@Recurso.Aceptar</button>
+        </div>
+    </script>

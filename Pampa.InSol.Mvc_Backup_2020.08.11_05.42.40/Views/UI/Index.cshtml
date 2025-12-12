@@ -1,0 +1,494 @@
+﻿@using System.Web.Mvc;
+@{
+    ViewBag.Title = "Guía de diseño";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<script type="text/javascript">
+    var validator;
+    $(function () {
+        validator = $(".form").kendoValidator({
+            validate: function (e) {
+                var elements = $('.form').find("span.k-widget");
+                $.each(elements, function (key, value) {
+                    var labelText = "";
+                    var $input = $(value).find("input.k-invalid");
+                    var $span = $(value).find("span.k-dropdown-wrap, span.k-numeric-wrap, span.k-picker-wrap");
+                    if ($input.size() > 0) {
+                        $($span).addClass("widget-validation-error");
+                    } else {
+                        $($span).removeClass("widget-validation-error");
+                    }
+                });
+            }
+        }).data("kendoValidator");
+    });
+
+    function verModal() {
+        loadConfirmDialog(event.target.id);
+    }
+    function verModalWarning() {
+        loadWarningDialog(event.target.id);
+    }
+    function validar() {
+
+        validator.validate();
+
+        var staticNotification = $("#staticNotification").data("kendoNotification");
+        staticNotification.getNotifications().remove();
+
+        staticNotification.show("<ul><li>Mensaje o listado de errores</li></ul>", "errorStyle");
+    }
+
+    function validarAlert() {
+
+        var staticNotification = $("#staticNotification").data("kendoNotification");
+        staticNotification.getNotifications().remove();
+
+        staticNotification.show("Mensaje de alerta", "alertStyle");
+    }
+</script>
+<h2>Gu&iacute;a de diseño</h2>
+<p>La siguiente documentación muestra los diferentes componentes, m&oacute;dulos y estilos visuales que se utilizan en la aplicación.</p>
+
+<div class="section">
+    <h3 class="guide-h2">Estructura</h3>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Componentes</h4>
+                    <p>La aplicación esta construida utlizando los siguientes componentes:</p>
+                    <p><b>Telerik</b> &amp; <b>Bootstrap</b> &amp; <b>Sass</b></p>
+                    <img src="~/Content/img/telerik.png" />
+                    <img src="~/Content/img/bootstrap.png" />
+                    <img src="~/Content/img/sass.png" />
+
+                </div>
+                <div class="gridEstructure col-md-6">
+                    <h4>Grilla</h4>
+                    <p>Se utiliza una grilla que da un total de 12 columnas fluidas con una separación de 30px para las calles.</p>
+                    <ul class="grid-bootstrap">
+                        <li class="col-lg-1 col-md-6 grid gray push-left">1</li>
+                        <li class="col-lg-1 col-md-6 grid middle-gray push-left">2</li>
+                        <li class="col-lg-1 col-md-6 grid gray push-left">3</li>
+                        <li class="col-lg-1 col-md-6 grid middle-gray push-left">4</li>
+                        <li class="col-lg-1 col-md-6 grid gray push-left">5</li>
+                        <li class="col-lg-1 col-md-6 grid middle-gray push-left">6</li>
+                        <li class="col-lg-1 col-md-6 grid gray push-left">7</li>
+                        <li class="col-lg-1 col-md-6 grid middle-gray push-left">8</li>
+                        <li class="col-lg-1 col-md-6 grid gray push-left">9</li>
+                        <li class="col-lg-1 col-md-6 grid middle-gray push-left">10</li>
+                        <li class="col-lg-1 col-md-6 grid gray push-left">11</li>
+                        <li class="col-lg-1 col-md-6 grid middle-gray push-left">12</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="section col-md-6">
+        <h3 class="guide-h2">Fuente</h3>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>T&iacute;tulos</h4>
+                        <h1>Header Level 1<em class="right">24px</em></h1>
+                        <pre id="htmlOutput" class="html prettyprint"><span class="tag">&lt;h1&gt;</span><span class="pln">Header Level 1</span><span class="tag">&lt;/h1&gt;</span></pre>
+                        <h2>Header Level 2<em class="right">22px</em></h2>
+                        <pre id="htmlOutput" class="html prettyprint"><span class="tag">&lt;h2&gt;</span><span class="pln">Header Level 2</span><span class="tag">&lt;/h2&gt;</span></pre>
+                        <h3>Header Level 3<em class="right">20px</em></h3>
+                        <pre id="htmlOutput" class="html prettyprint"><span class="tag">&lt;h3&gt;</span><span class="pln">Header Level 3</span><span class="tag">&lt;/h3&gt;</span></pre>
+                        <h4>Header Level 4<em class="right">18px</em></h4>
+                        <pre id="htmlOutput" class="html prettyprint"><span class="tag">&lt;h4&gt;</span><span class="pln">Header Level 4</span><span class="tag">&lt;/h4&gt;</span></pre>
+                        <h5>Header Level 5<em class="right">14px</em></h5>
+                        <pre id="htmlOutput" class="html prettyprint"><span class="tag">&lt;h5&gt;</span><span class="pln">Header Level 5</span><span class="tag">&lt;/h5&gt;</span></pre>
+                        <h6>Header Level 6<em class="right">12px</em></h6>
+                        <pre id="htmlOutput" class="html prettyprint"><span class="tag">&lt;h6&gt;</span><span class="pln">Header Level 6</span><span class="tag">&lt;/h6&gt;</span></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section color col-md-6">
+        <h3>Color</h3>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Variables</h4>
+                        <p>Color primario</p>
+                        <pre id="htmlOutput" class="html prettyprint"><span class="pln"><span class="tag">$first-color</span>: #72BBD8;</span><span class="pun">// Header, buttons, details</span><span class="firstColor right"></span></pre>
+                        <p>Color secundario</p>
+                        <pre id="htmlOutput" class="html prettyprint"><span class="pln"><span class="tag">$second-color</span>: #10678A;</span><span class="pun">// Menu, fotter, details</span><span class="secondColor right"></span></pre>
+
+                        <p>Body</p>
+                        <pre id="htmlOutput" class="html prettyprint"><span class="pln"><span class="tag">$bg-body</span>: #FDFDFD;</span><span class="pun">// Body</span><span class="bodyColor right"></span></pre>
+                        <p>Content</p>
+                        <pre id="htmlOutput" class="html prettyprint"><span class="pln"><span class="tag">$bg-content</span>: #F9F9F9;</span><span class="pun">//Content, modal</span><span class="contentColor right"></span></pre>
+                        <p>Seccion</p>
+                        <pre id="htmlOutput" class="html prettyprint"><span class="pln"><span class="tag">$bg-seccion</span>: #E0E0E0;</span><span class="pun">// Seccion filter, result</span><span class="seccionColor right"></span></pre>
+                        <p>Header seccion</p>
+                        <pre id="htmlOutput" class="html prettyprint"><span class="pln"><span class="tag">$bg-header-seccion</span>: #D0D0D0;</span><span class="pun">// Header seccion filter, result</span><span class="headerSeccionColor right"></span></pre>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section buttonsUI">
+    <h3>Contenedores</h3>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Contenedor light</h4>
+                    <div class="contentLight contentUi">
+                        <h5 class="titleColor">Nombre de secci&oacute;n</h5>
+                    </div>
+                    <pre id="htmlOutput" class="html prettyprint"><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"contentLight"</span><span class="pln"></span><span class="tag">&gt;</span><span class="pln"></span>
+                    <span class="tag">&lt;h5</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"titleColor"</span><span class="tag">&gt;</span>Nombre de secci&oacute;n<span class="pln"></span><span class="tag">&lt;/h5&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                </div>
+                <div class="col-md-6">
+                    <h4>Contenedor dark</h4>
+                    <div class="contentDark contentUi">
+                        <h5 class="title">Nombre de secci&oacute;n</h5>
+                    </div>
+                    <pre id="htmlOutput" class="html prettyprint"><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"contentDark"</span><span class="pln"></span><span class="tag">&gt;</span><span class="pln"></span>
+                    <span class="tag">&lt;h5</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"title"</span><span class="tag">&gt;</span>Nombre de secci&oacute;n<span class="pln"></span><span class="tag">&lt;/h5&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="section buttonsUI">
+    <h3>Botones</h3>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Primarios</h4>
+                    <button class="k-button k-primary add-button" type="button">Nuevo usuario</button>
+                    <pre id="htmlOutput" class="html prettyprint"><span class="tag">&lt;button</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"k-button k-primary add-button"</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"button"</span><span class="tag">&gt;</span><span class="pln">Nuevo Usuario</span><span class="tag">&lt;/button&gt;</span></pre>
+
+                    <h4 class="guide-h3">Primarios con iconos</h4>
+                    <p>En muchos casos los botones pueden llegar a tener íconos de Glyphicons.</p>
+                    <button class="k-button k-primary add-button" type="button"><i class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></i>  Guardar</button>
+                    <pre id="htmlOutput" class="html prettyprint"><span class="tag">&lt;button</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"k-button k-primary add-button"</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"button"</span><span class="tag">&gt;</span><span class="pln"> </span><span class="tag">&lt;i</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"glyphicon glyphicon-floppy-disk"<span class="tag">&lt;/i&gt;</span></span> Guardar<span class="tag">&lt;/button&gt;</span></pre>
+
+                    <h4 class="guide-h3">Secundarios</h4>
+                    <button class="k-button second-button" type="button"><i class="glyphicon glyphicon-search" aria-hidden="true"></i>Buscar</button>
+                    <pre id="htmlOutput" class="html prettyprint"><span class="tag">&lt;button</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"k-button second-button"</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"button"</span><span class="tag">&gt;</span><span class="pln"> </span><span class="tag">&lt;i</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"glyphicon glyphicon-search"</span><span class="tag">&lt;/i&gt;</span> Buscar<span class="tag">&lt;/button&gt;</span></pre>
+
+                    <h4 class="guide-h3">Link</h4>
+                    <button class="k-button btn-link" type="button">Cancelar</button>
+                    <pre id="htmlOutput" class="html prettyprint"><span class="tag">&lt;button</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"k-button btn-link"</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"button"</span><span class="tag">&gt;</span><span class="pln"> </span>Cancelar<span class="tag">&lt;/button&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section buttonsUI">
+    <h3>Filtros</h3>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="bnt-filter" data-toggle="collapse" data-target="#demo">
+                        <i class="glyphicon glyphicon-filter" aria-hidden="true"></i>
+                        Filtros
+                    </button>
+                    <div id="demo" class="collapse in">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filterContent">
+                                    <div class="demo-section k-content col-md-12 notPadding">
+                                        <ul id="fieldlist">
+                                            <li class="col-md-3 col-sm-6 col-xs-12">
+                                                <label for="orders">Desde</label>
+                                                <span class="k-widget k-datetimepicker k-header"><span class="k-picker-wrap k-state-default"><input data-val="true" data-val-date="The field FechaHora must be a date." data-val-required="The FechaHora field is required." id="FechaHora" name="FechaHora" type="text" value="6/10/2016 5:59 PM" data-role="datetimepicker" class="k-input" role="combobox" aria-expanded="false" aria-disabled="false" aria-readonly="false" style="width: 100%;"><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-calendar" role="button" aria-controls="FechaHora_dateview">select</span><span unselectable="on" class="k-icon k-i-clock" role="button" aria-controls="FechaHora_timeview">select</span></span></span></span>
+
+                                            </li>
+                                            <li class="col-md-3 col-sm-6 col-xs-12">
+                                                <label for="orders">Hasta</label>
+                                                <span class="k-widget k-datetimepicker k-header"><span class="k-picker-wrap k-state-default"><input data-val="true" data-val-date="The field FechaHora must be a date." data-val-required="The FechaHora field is required." id="FechaHora" name="FechaHora" type="text" value="6/10/2016 5:59 PM" data-role="datetimepicker" class="k-input" role="combobox" aria-expanded="false" aria-disabled="false" aria-readonly="false" style="width: 100%;"><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-calendar" role="button" aria-controls="FechaHora_dateview">select</span><span unselectable="on" class="k-icon k-i-clock" role="button" aria-controls="FechaHora_timeview">select</span></span></span></span>
+                                            </li>
+                                            <li class="col-md-3 col-sm-6 col-xs-12">
+                                                <label for="orders">Planta</label>
+                                                @*@Html.TextBoxFor(m => m.ProductoEnTanque, new { id = "producto", @class = "form-style", required = "required" })*@
+                                            </li>
+                                            <li class="col-md-3 col-sm-6 col-xs-12">
+                                                <label for="orders">Productos</label>
+                                                @*@Html.TextBoxFor(m => m.ProductoEnTanque, new { id = "producto", @class = "form-style", required = "required" })*@
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="k-content btn-filter col-md-12">
+                                        <a ref="#" class="k-button second-button"><i class="glyphicon glyphicon-search" aria-hidden="true"></i>Buscar</a>
+                                        <a href="" class="btnLink">Limpiar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Panel header</h4>
+                    <pre id="htmlOutput" class="html prettyprint"><span class="tag">&lt;button</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"bnt-filter"</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"button"</span><span class="pln"> </span><span class="atn">data-toggle</span><span class="pun">=</span><span class="atv">"collapse"</span><span class="pln"> </span><span class="atn">data-target</span><span class="pun">=</span><span class="atv">"#demo"</span><span class="tag">&gt;</span><span class="tag">&lt;i</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"glyphicon glyphicon-filter"</span><span class="tag">&gt;</span><pan class="pln"><span class="tag">&lt;/i&gt;</span> Filtros<span class="tag">&lt;/button&gt;</span></pre>
+                    <h4 class="guide-h2">Panel body</h4>
+                    <pre id="htmlOutput" class="html prettyprint"><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"demo"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"collapse in"</span><span class="pln"></span><span class="tag">&gt;</span><span class="pln">
+   </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"row"</span><span class="tag">&gt;</span><span class="pln">
+      </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"col-md-12"</span><span class="tag">&gt;</span><span class="pln">
+         </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"filterContent"</span><span class="tag">&gt;</span> ... <span class="tag">&lt;/div&gt;</span>
+                    <span class="tag">&lt;/div&gt;</span><span class="pln">
+   </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;/div&gt;</span></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <h3>Formulario</h3>
+    <div class="panel panel-default">
+        <div class="panel-body form">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Se utilizan los componentes de <b>Kendo</b> y se deben agregar las siguientes clases seg&uacute;n cual se aplique.</p>
+                    <p><span class="atv">"form-width"</span>: ajusta el ancho</p>
+                    <p><span class="atv">"form-style"</span>: aplica estilos</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("Readonly")
+                    @Html.TextBox("ProductoEnTanque", "", new { id = "producto", @class = "form-style", @readonly = "readonly" })
+                    <pre id="htmlOutput" class="html prettyprint">&#64;Html.TextBox
+<span class="tag">new</span> &lbrace;<span class="tag">&#64;</span><span class="atn">class</span><span class="pun">=</span><span class="atv">"form-style"</span><span class="pln"> </span>, <span class="tag">&#64;</span><span class="atn">readonly</span><span class="pun">=</span><span class="atv">"readonly"</span>&rbrace;</pre>
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Disabled")
+                    @Html.TextBox("ProductoEnTanque", "", new { id = "producto", disabled = "disabled", @class = "form-style" })
+                    <pre id="htmlOutput" class="html prettyprint">&#64;Html.TextBox
+<span class="tag">new</span> &lbrace;<span class="tag">&#64;</span><span class="atn">class</span><span class="pun">=</span><span class="atv">"form-style"</span><span class="pln"> </span>, <span class="atn">disable</span><span class="pun">=</span><span class="atv">"disabled"</span>&rbrace;</pre>
+                </div>
+                <div class="col-md-6" style="height:136px;">
+                    @Html.Label("Input")
+                    @Html.TextBox("ProductoEnTanque", "", new { id = "producto", @class = "form-style", required = "required" })
+                    <pre id="htmlOutput" class="html prettyprint">&#64;Html.TextBox
+<span class="tag">new</span> &lbrace;<span class="tag">&#64;</span><span class="atn">class</span><span class="pun">=</span><span class="atv">"form-style"</span>&rbrace;</pre>
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("DatePicker")
+                    @(Html.Kendo().DateTimePicker()
+                            .Name("DatePicker")
+                            .HtmlAttributes(new { @class = "form-width", @required = "required" })
+                            .Value(DateTime.Now)
+                    )
+                    <pre id="htmlOutput" class="html prettyprint">&#64;(Html.Kendo().DateTimePicker()...
+.HtmlAttributes(<span class="tag">new</span>&lbrace;<span class="tag">&#64;</span><span class="atn">class</span><span class="pun">=</span><span class="atv">"form-width"</span>&rbrace;)</pre>
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Dropdown")
+                    @(Html.Kendo().DropDownList()
+          .Name("Planta")
+          .DataTextField("Text")
+          .DataValueField("Value")
+          .BindTo(new List<SelectListItem>() {
+              new SelectListItem() {
+                  Text = "",
+                  Value = ""
+              },
+              new SelectListItem() {
+                  Text = "Planta 2",
+                  Value = "2"
+              },
+              new SelectListItem() {
+                  Text = "Planta 3",
+                  Value = "3"
+              }
+          })
+          .Value("1")
+          .HtmlAttributes(new { @class = "form-width", @required = "required" })
+                    )
+                    <pre id="htmlOutput" class="html prettyprint">&#64;(Html.Kendo().DropDownList()...
+.HtmlAttributes(<span class="tag">new</span>&lbrace;<span class="tag">&#64;</span><span class="atn">class</span><span class="pun">=</span><span class="atv">"form-width"</span>&rbrace;)</pre>
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("Radio Button")
+                    <div class="divRadioButton">
+                        @(Html.Kendo().RadioButton().Name("engine1").Checked(true).HtmlAttributes(new { @name = "engine" }).Label("opción 1"))
+                        @(Html.Kendo().RadioButton().Name("engine2").HtmlAttributes(new { @name = "engine" }).Label("opción 2"))
+                    </div>
+                    <pre id="htmlOutput" class="html prettyprint">&#64;(Html.Kendo().RadioButton()...
+.HtmlAttributes(<span class="tag">new</span>&lbrace;<span class="tag">&#64;</span><span class="atn">class</span><span class="pun">=</span><span class="atv">"form-style"</span><span class="pln"> </span>, <span class="atn">disable</span><span class="pun">=</span><span class="atv">"disabled"</span>&rbrace;)</pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Validaciones</h4>
+                    <div id="appendto" class="demo-section k-content"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="k-button k-primary add-button" type="button" onclick="javascript: validar();">Ver error</button>
+                    <pre id="htmlOutput" class="html prettyprint"><span class="pun">Contenedor mensaje de error</span>
+<span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"appendto"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"demo-section k-content"</span><span class="tag">&gt;</span><span class="tag">&lt;/div&gt;</span><span class="pln"> </span>
+<span class="tag">var</span> staticNotification = $(<span class="atv">"#staticNotification"</span>).data(<span class="atv">"kendoNotification"</span>);
+  staticNotification.getNotifications().remove();
+  staticNotification.show(<span class="atv">"&lt;ul&gt;&lt;li&gt;Mensaje o listado de errores&lt;/li&gt;&lt;/ul&gt;"</span>, <span class="atv">"errorStyle"</span>);
+</pre>
+                </div>
+                <div class="col-md-6">
+                    <button class="k-button k-primary add-button" type="button" onclick="javascript: validarAlert();">Ver warning</button>
+                    <pre id="htmlOutput" class="html prettyprint"><span class="pun">Contenedor mensaje de alerta</span>
+<span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"appendto"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"demo-section k-content"</span><span class="tag">&gt;</span><span class="tag">&lt;/div&gt;</span><span class="pln"> </span>
+<span class="tag">var</span> staticNotification = $(<span class="atv">"#staticNotification"</span>).data(<span class="atv">"kendoNotification"</span>);
+  staticNotification.getNotifications().remove();
+  staticNotification.show(<span class="atv">"Mensaje d alerta"</span>, <span class="atv">"alertStyle"</span>);
+</pre>
+                </div>
+            </div>
+            @(Html.Kendo().Notification()
+                .Name("staticNotification")
+                .AppendTo("#appendto")
+                .AutoHideAfter(0)
+                .HideOnClick(false)
+            )
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="section">
+    <h3>Notificaciones</h3>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <button class="k-button k-primary add-button" type="button" onclick="javascript: showSuccessNotification('titulo','mensaje');">Success</button>
+                    <pre id="htmlOutput" class="html prettyprint"><span class="pun">Notificaciones ok</span>
+javascript: <span class="tag">showSuccessNotification</span>(<span class="atv">'titulo','mensaje'</span>)
+</pre>
+                </div>
+                <div class="col-md-3">
+                    <button class="k-button k-primary add-button" type="button" onclick="javascript: showErrorNotification('mensaje');">Error</button>
+                    <pre id="htmlOutput" class="html prettyprint"><span class="pun">Notificaciones error</span>
+javascript: <span class="tag">showErrorNotification</span>(<span class="atv">'mensaje'</span>)
+</pre>
+                </div>
+                <div class="col-md-3">
+                    <button class="k-button k-primary add-button" type="button" onclick="javascript: showAlertNotification('titulo', 'mensaje');">Alert</button>
+                    <pre id="htmlOutput" class="html prettyprint"><span class="pun">Notificaciones alertas</span>
+javascript: <span class="tag">showAlertNotification</span>(<span class="atv">'titulo' , 'mensaje'</span>)
+</pre>
+                </div>
+                <div class="col-md-3">
+                    <button class="k-button k-primary add-button" type="button" onclick="javascript: showInfoNotification('titulo', 'mensaje');">Info</button>
+                    <pre id="htmlOutput" class="html prettyprint"><span class="pun">Notificaciones informaci&oacute;n</span>
+javascript: <span class="tag">showInfoNotification</span>(<span class="atv">'titulo' , 'mensaje'</span>)</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="section">
+    <h3>Modal</h3>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    @(Html.Kendo().Button()
+        .Name("btnGrabarOperacion")
+        .HtmlAttributes(new
+        {
+            type = "button",
+            @class = "k-button k-primary add-button confirmation",
+            @data_confirm_title = "Modal confirmación",
+            @data_confirm_msg = "Se va a guardar una nueva operación en el sistema.",
+            @data_action = "submit",
+
+        })
+        .Content("Ver modal confirmación")
+        .Events(e => e.Click("verModal")))
+
+                    <pre id="htmlOutput" class="html prettyprint">&#64;(Html.Kendo().Window()
+.Name("confirmation")
+.Actions(actions => actions.Close())
+.Visible(false)
+)
+<span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"modal-confirmation"</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"text/x-kendo-template"</span><span class="pln"></span><span class="tag">&gt;</span><span class="pln">
+   </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"modal-boy"</span><span class="tag">&gt;</span><span class="pln">
+        </span><span class="tag">&lt;p</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"msg"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"confirm-message"</span><span class="tag">&gt;</span><span class="tag">&lt;/p&gt;</span>
+                    <span class="tag">&lt;p</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"confirm-message"</span><span class="tag">&gt;</span><span class="tag">&lt;/p&gt;</span>
+                    <span class="tag">&lt;/div&gt;</span><span class="pln">
+   </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"modal-footer"</span><span class="tag">&gt;</span><span class="pln">
+        </span><span class="tag">&lt;button</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"modal-confirm k-button k-primary add-button"</span><span class="tag">&gt;</span><span class="pln"></span>Si<span class="tag">&lt;/div&gt;</span><span class="pln">
+        </span><span class="tag">&lt;button</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"modal-cancel k-button second-button"</span><span class="tag">&gt;</span><span class="pln"></span>No<span class="tag">&lt;/div&gt;</span><span class="pln">
+   </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;/script&gt;</span></pre>
+
+
+                </div>
+
+
+                <div class="col-md-6">
+                    @(Html.Kendo().Button()
+        .Name("btnVerModalWarning")
+        .HtmlAttributes(new
+        {
+            type = "button",
+            @class = "k-button k-primary add-button warning",
+            @data_warning_title = "Warning",
+            @data_warning_msg = "Se va a guardar una nueva operación en el sistema",
+
+        })
+        .Content("Ver modal mensaje")
+        .Events(e => e.Click("verModalWarning")))
+                    <pre id="htmlOutput" class="html prettyprint">&#64;(Html.Kendo().Window()
+.Name("warning")
+.Actions(actions => actions.Close())
+.Visible(false)
+)
+<span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"modal-warning"</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"text/x-kendo-template"</span><span class="pln"></span><span class="tag">&gt;</span><span class="pln">
+   </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"modal-boy"</span><span class="tag">&gt;</span><span class="pln">
+     </span><span class="tag">&lt;p</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"msgwarning"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"confirm-message"</span><span class="tag">&gt;</span><span class="tag">&lt;/p&gt;</span>
+                    <span class="tag">&lt;/div&gt;</span><span class="pln">
+   </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"modal-footer"</span><span class="tag">&gt;</span><span class="pln">
+     </span><span class="tag">&lt;button</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"modal-cancel k-button second-button"</span><span class="tag">&gt;</span><span class="pln"></span>Aceptar<span class="tag">&lt;/div&gt;</span><span class="pln">
+   </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;/script&gt;</span>
+</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="section">
+    <h3>Grilla</h3>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

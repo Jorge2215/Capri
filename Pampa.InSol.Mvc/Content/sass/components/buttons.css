@@ -1,0 +1,74 @@
+/*
+Error: Undefined variable: "$first-color".
+        on line 4 of C:\dev\nati\TOM\Main\TOM\Pampa.InSol.Mvc\Content\sass\components\buttons.scss
+
+1: 
+2: .k-button{
+3:     &.k-primary.add-button{
+4:         background:$first-color;
+5:         color: #FFF;
+6:         border-radius: 2px;
+7:         padding: 5px 12px;
+8:         border: 1px solid $first-color;
+9:         box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+
+Backtrace:
+C:\dev\nati\TOM\Main\TOM\Pampa.InSol.Mvc\Content\sass\components\buttons.scss:4
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/script/tree/variable.rb:49:in `_perform'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/script/tree/node.rb:50:in `perform'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:384:in `visit_prop'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/stack.rb:79:in `block in with_base'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/stack.rb:115:in `with_frame'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/stack.rb:79:in `with_base'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:420:in `block (2 levels) in visit_rule'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:420:in `map'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:420:in `block in visit_rule'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:418:in `visit_rule'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/stack.rb:79:in `block in with_base'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/stack.rb:115:in `with_frame'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/stack.rb:79:in `with_base'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:420:in `block (2 levels) in visit_rule'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:420:in `map'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:420:in `block in visit_rule'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:418:in `visit_rule'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/stack.rb:79:in `block in with_base'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/stack.rb:115:in `with_frame'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/stack.rb:79:in `with_base'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/base.rb:52:in `map'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:157:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:8:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/root_node.rb:36:in `css_tree'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/engine.rb:368:in `_render_with_sourcemap'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/engine.rb:285:in `render_with_sourcemap'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/exec/sass_scss.rb:375:in `run'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/exec/sass_scss.rb:62:in `process_result'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/exec/base.rb:40:in `parse'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/exec/base.rb:19:in `parse!'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/bin/sass:13:in `<top (required)>'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/bin/sass:19:in `load'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/bin/sass:19:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined variable: \"$first-color\".\A         on line 4 of C:\dev\nati\TOM\Main\TOM\Pampa.InSol.Mvc\Content\sass\components\buttons.scss\A \A 1: \A 2: .k-button{\A 3:     &.k-primary.add-button{\A 4:         background:$first-color;\A 5:         color: #FFF;\A 6:         border-radius: 2px;\A 7:         padding: 5px 12px;\A 8:         border: 1px solid $first-color;\A 9:         box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);"; }

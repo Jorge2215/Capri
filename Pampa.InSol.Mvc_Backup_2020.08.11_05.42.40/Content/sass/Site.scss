@@ -1,0 +1,64 @@
+﻿// Color
+$first-color: #72BBD8; // blue light
+$second-color: #10678A; // blue
+
+$second-button: #868686; // color second button
+$second-hover: #5F5F5F; // hover second button
+
+$bg-body: #fdfdfd; // background body
+$bg-content: #F9F9F9; // background modal contentLight
+$bg-seccion: #E0E0E0; // background seccion filter and result contentDadrk
+$bg-header-seccion: #D0D0D0; // background header seccion filter and result
+
+//Error color
+$error-bg: #f2dede; //#f2dede; // bakground color red
+$error-border: #D2AAAA; //#CC6563; // border color red
+$error-color: #a94442; //#A53937; // tipografia color red
+
+//Success color
+$success-bg: #dff0d8; // bakground color green
+$success-border: #A6CC87; // border color green
+$success-color: #3c763d; // tipografia color green
+
+//Alert color
+$alert-bg: #FFFAE2; // bakground color yellow
+$alert-border: #E2CDA3; // border color yellow
+$alert-color: #AF8633; // tipografia color yellow
+
+//Info color
+$info-bg: #d9edf7; // bakground color blue
+$info-border: #92CCD8; // border color blue
+$info-color: #31708f; // tipografia color blue
+
+// Media Queries
+$screen-xs-max: 420px;
+$screen-mobile-max: 768px;
+
+$screen-sm-min: 768px;
+$screen-sm-min: 980px;
+
+$screen-md-max: 1024px;
+
+$screen-lg-min: 1200px;
+
+
+// vistas layout
+@import "layout/general";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/menu";
+@import "layout/media-queries";
+
+// vistas components
+@import "components/buttons";
+@import "components/filters";
+@import "components/grid";
+@import "components/modal";
+@import "components/validations";
+@import "components/graphics";
+
+// vistas pages
+@import "pages/ui";
+@import "pages/newOperation";
+@import "pages/users";
+@import "pages/home";

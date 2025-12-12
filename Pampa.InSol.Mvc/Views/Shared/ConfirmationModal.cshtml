@@ -1,0 +1,17 @@
+﻿@using Recurso = Pampa.InSol.Common.Recursos.General    
+
+@(Html.Kendo().Window()
+        .Name("confirmation")
+        .Actions(actions => actions.Close())
+        .Visible(false)
+    )
+    <script id="modal-confirmation" type="text/x-kendo-template">
+        <div class="modal-body">
+            <p id="msg" class="confirm-message"></p>
+            <p class="confirm-message">@Recurso.DeseaContinuar</p>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-confirm k-button k-primary add-button">@Recurso.Si</button>
+            <button class="modal-cancel k-button second-button">@Recurso.No</button>
+        </div>
+    </script>

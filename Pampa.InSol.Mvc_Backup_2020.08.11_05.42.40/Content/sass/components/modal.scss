@@ -1,0 +1,179 @@
+//Modal Confirmation 
+.k-window{
+     min-width: 365px!important;
+}   
+.k-window-titlebar{
+    height: 34px!important;
+    background: white!important;
+    .k-window-title{
+        margin: 8px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 500;
+        font-size: 18px;
+    }
+}
+#warning,
+#confirmation{
+    padding: 0;
+    .modal-body {
+        padding: 15px;
+    }
+    .modal-footer{
+        padding: 10px;
+    }
+}   
+
+#warning{
+    .second-button {
+       margin: 0!important;
+    }
+}   
+
+
+#warning_wnd_title,
+#confirmation_wnd_title{
+    background: #f5f5f5;
+    color:$alert-color;
+    border-bottom: 1px solid $alert-border;
+    padding: 13px 15px 0 15px;
+    height: 35px;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    margin: 0;
+    i{
+        padding-right: 5px;
+    }
+}
+#warning_wnd_title{
+    color:$alert-color;
+    border-bottom: 1px solid $alert-border;
+}
+#confirmation_wnd_title{
+    color:$info-color;
+    border-bottom: 1px solid $info-border;
+}
+
+.titleColor{
+    color: #6E9EBF;
+    margin: 4px 0 4px 0;
+}
+
+.modal-body{
+    padding: 15px;
+    .select{
+        height: 66px;
+        float: left;
+    }
+
+    .description{
+        textarea{
+            margin-bottom: 0;
+            height:auto;
+        }
+    } 
+    .k-widget.k-datetimepicker.k-header{
+        width: 100%;
+    }
+}
+
+.result{
+    text-align: center;
+    input{
+        width: 80px;
+        @media (max-width:$screen-mobile-max){
+            float: left;
+            clear: left;
+        } 
+    }
+    @media (max-width:$screen-mobile-max){
+        clear:left;
+    } 
+}
+
+.contentLight{
+    div{
+       // margin-bottom: 6px;
+       // height: 50px;
+       height: 100%;
+        .tooltip-inner{
+            height: auto;
+            margin-bottom: 0;
+        }
+        .tooltip-arrow, 
+        .tooltip.fade.top.in{
+            height: auto;
+            margin-bottom: 0;
+        }
+    }
+    .contentItem{
+        text-align: center;
+    label{
+        margin: 0 15px;
+        }
+    }
+   .k-widget{
+        &.k-datetimepicker{
+             @media (max-width:$screen-xs-max){
+                 width: 100%;
+             }
+            &.k-header{
+                width:100%;
+            }
+        }
+    }
+}
+
+.modal-footer{
+    margin-top: 0;
+}
+
+
+//style modal buttons
+
+.k-radio-label:after{
+    top: 2px !important;
+    left: 2px !important;
+}
+
+.modal-footer {
+    .k-button{
+        &.k-primary.add-button{
+        margin: 0;
+        float:right;
+        }
+        &.second-button{
+            margin: 0 15px;
+            float:none;
+        }
+        @media (max-width:$screen-xs-max){
+            width: 100%;
+            margin: 10px 0!important;
+            height: 42px;   
+        } 
+    }
+    .btn-link.k-button{
+        font-weight: normal;
+        color: #428bca;
+        cursor: pointer;
+        border-radius: 0;
+        border: none;
+        background: none;
+        height: 36px;
+        padding: 5px 12px;
+        margin: 0;
+        &:hover{
+            background: none;
+            color: #5393BF;
+        }      
+        @media (max-width:$screen-xs-max){
+            width: 100%;
+        }      
+    } 
+}
+
+.contentInput{
+    height:50px!important;
+}

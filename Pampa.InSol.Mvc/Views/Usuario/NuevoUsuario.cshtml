@@ -1,0 +1,113 @@
+﻿@model Pampa.InSol.Entities.Models.UsuarioModel
+@{
+    if (Model.Id == 0) 
+    { 
+        ViewBag.Title = Pampa.InSol.Common.Recursos.General.TitleNuevoUsuario;
+    }
+    else
+    {
+        ViewBag.Title = Pampa.InSol.Common.Recursos.General.TitleEdicionUsuario;
+    }
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@if (Model.Id == 0)
+{
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink(Pampa.InSol.Common.Recursos.General.TitleAdministracionUsuarios, "Index", "Usuario")</li>
+        <li class="active">@Pampa.InSol.Common.Recursos.General.TitleNuevoUsuario</li>
+    </ol>
+
+    <h4>@Pampa.InSol.Common.Recursos.General.TitleNuevoUsuario</h4>
+}
+else
+{
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink(Pampa.InSol.Common.Recursos.General.TitleAdministracionUsuarios, "Index", "Usuario")</li>
+        <li class="active">@Pampa.InSol.Common.Recursos.General.TitleEdicionUsuario</li>
+    </ol>
+
+    <h4>@Pampa.InSol.Common.Recursos.General.TitleEdicionUsuario</h4>
+}
+<div id="usuarioForm" class="bops-sections contentLight">
+    <div class="subtitles"></div>
+    <div class="row">
+        @Html.HiddenFor(m => m.Id)
+        <div class="col-lg-4 col-md-4 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-xs-4">
+                <label>Usuario de Red:</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-8">
+                @(Html.Kendo().TextBox()
+                    .Name("UserNT")
+                    .Value(Model.UsuarioNT)
+                )
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-xs-4">
+                <label>Nombre:</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-8">
+                @(Html.Kendo().TextBox()
+                    .Name("Nombre").HtmlAttributes(new { @readonly = "readonly" })
+                    .Value(Model.Nombre)
+                )
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-xs-4">
+                <label>Apellido:</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-8">
+                @(Html.Kendo().TextBox()
+                    .Name("Apellido").HtmlAttributes(new { @readonly = "readonly" })
+                    .Value(Model.Apellido)
+                )
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-xs-4">
+                <label>Activo:</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-8">
+                @(Html.CheckBoxFor(m => m.Activo)
+                )
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bops-sections contentLight">
+    @Html.Partial("RolesPicker", Model.Roles)
+</div>
+<div id="div-btn" class="contentLight">
+    <input id="btnGuardar" type="button" class="k-button second-button add-button k-primary" value="Guardar" />
+    @Html.ActionLink("Volver", "Index", null, new { @class = "k-button second-button" })
+</div>
+<script>
+    $(function() {
+        newUsuario.init({
+            idUsuario: @Model.Id,
+            txtUsuario: '#UserNT',
+            txtNombre: '#Nombre',
+            txtApellido: '#Apellido',
+            chkActivo: '#Activo',
+
+            btn_guardar_relaciones: '#btnGuardarCambios',
+            btn_roles_add: '#btnAddRolesList',
+            btn_roles_add_all: '#btnAddAllRolesList',
+            btn_roles_remove: '#btnRemoveRolesList',
+            btn_roles_remove_all: '#btnRemoveAllRolesList',
+
+            btnGuardar: '#btnGuardar',
+
+            urlNuevoUsuario: '@Url.Action("NuevoUsuario")',
+            urlGetUsuarioAD: '@Url.Action("GetUsuarioAD")',
+        });
+    })
+</script>
+@Scripts.Render("~/bundles/NuevoUsuario")

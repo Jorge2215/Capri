@@ -1,0 +1,114 @@
+﻿@model Pampa.InSol.Entities.Models.RolViewModel
+@{
+    if (Model.Id == 0)
+    {
+        ViewBag.Title = Pampa.InSol.Common.Recursos.General.TitleNuevoRol;
+    }
+    else
+    {
+        ViewBag.Title = Pampa.InSol.Common.Recursos.General.TitleEdicionRol;
+    }
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@if (Model.Id == 0)
+{
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink(Pampa.InSol.Common.Recursos.General.TitleAdministracionRoles, "Index", "RolFunciones")</li>
+        <li class="active">@Pampa.InSol.Common.Recursos.General.TitleNuevoRol</li>
+    </ol>
+
+    <h4>@Pampa.InSol.Common.Recursos.General.TitleNuevoRol</h4>
+}
+else
+{
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink(Pampa.InSol.Common.Recursos.General.TitleAdministracionRoles, "Index", "RolFunciones")</li>
+        <li class="active">@Pampa.InSol.Common.Recursos.General.TitleEdicionRol</li>
+    </ol>
+
+    <h4>@Pampa.InSol.Common.Recursos.General.TitleEdicionRol</h4>
+}
+<div id="usuarioForm" class="contentLight" style="float: none;">
+    <div class="subtitles"></div>
+    <div class="row">
+        @Html.HiddenFor(m => m.Id)
+        <div class="col-lg-4">
+            <div class="col-lg-4">
+                <label>Descripciòn:</label>
+            </div>
+            <div class="col-lg-8">
+                @(Html.Kendo().TextBox()
+                    .Name("Descripcion")
+                    .Value(Model.Descripcion)
+                )
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="col-lg-4">
+                <label>Activo:</label>
+            </div>
+            <div class="col-lg-8">
+                @(Html.CheckBoxFor(m => m.Activo))
+            </div>
+        </div>
+    </div>
+</div>
+<div class="contentLight">
+    @(Html.Kendo().TreeList<Pampa.InSol.Entities.Models.FuncionViewModel>()
+            .Name("functionTree")
+            .Columns(columns =>
+            {
+                columns.Add().Field(e => e.Id)
+                    .Title(" ")
+                    .Width(100)
+                    .Template("<input id= #= Id # class='check' type='checkbox' #= Asignado ? checked='checked' : '' # />");
+                columns.Add().Field(e => e.Descipcion)
+                    .Title("Descripción");
+            })
+            .AutoBind(false)
+            .Selectable(true)
+            .Events(events => events.Change("saveRol.onSelectedRow")
+                            .DataBound("saveRol.onDataBound"))
+            .DataSource(dataSource => dataSource
+                .Read(read => read.Action("Funciones_Read", "RolFunciones").Data("saveRol.getFilters"))
+                .ServerOperation(false)
+                .Model(m =>
+                {
+                    m.Id(f => f.Id);
+                    m.ParentId(f => f.IdPadre);
+                    m.Expanded(true);
+                    m.Field(f => f.Descipcion);
+                })
+            )
+    )
+</div>
+<div id="div-btn" class="contentLight">
+    <input id="btnGuardar" type="button" class="k-button second-button add-button k-primary" value="Guardar" />
+    @Html.ActionLink("Volver", "Index", null, new { @class = "k-button second-button" })
+</div>
+
+<style>
+    .k-grid .k-grid-content {
+        overflow-y: auto;
+    }
+</style>
+
+@Scripts.Render("~/bundles/NewRoles")
+<script type="text/javascript">
+    $(function () {
+        saveRol.init(
+        {
+            idRol: @Model.Id,
+            chk_activos: "#Activo",
+            descripcion_consulta: "#Descripcion",
+            tree: "#functionTree",
+            classChk: '.check',
+            btnSave: '#btnGuardar',
+
+            urlSave: '@Url.Action("SaveRol")',
+        })
+    });
+</script>

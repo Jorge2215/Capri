@@ -1,0 +1,54 @@
+@media (max-width: 768px) {
+  header .container > .navbar-header {
+    padding: 0 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+    margin: 0; }
+  header .navbar-collapse {
+    display: block; }
+  header .nav-pills > li {
+    float: none; }
+  header .nav-collapse {
+    height: auto;
+    width: 100%;
+    background: #F3F3F4; }
+    header .nav-collapse li {
+      border-bottom: 1px solid #D0D0D0; }
+    header .nav-collapse a {
+      color: #535b6a; }
+      header .nav-collapse a:hover {
+        color: #4A85B1;
+        background-color: #DEDEDE !important; }
+  header .nav.in li {
+    border-top: 1px solid #D0D0D0;
+    border-bottom: none; }
+
+  .contentModal .select {
+    height: auto; }
+  .contentModal .k-picker-wrap.k-state-default {
+    width: auto; }
+    .contentModal .k-picker-wrap.k-state-default .k-input.k-valid {
+      width: 100%;
+      max-width: 100%; }
+
+  .contentItem label {
+    clear: left;
+    float: left;
+    margin: 0 !important; }
+
+  .contentResult {
+    float: left;
+    width: 100%; } }
+@media (min-width: 768px) {
+  .navbar-collapse {
+    display: none; }
+
+  .modal-dialog {
+    width: 768px; } }
+@media (min-width: 980px) {
+  .modal-dialog {
+    width: 980px; } }
+@media (max-width: 1024px) {
+  .k-webkit .k-pager-numbers .k-current-page .k-link {
+    border-radius: 4px; } }
+
+/*# sourceMappingURL=media-queries.css.map */

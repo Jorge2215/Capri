@@ -1,0 +1,71 @@
+﻿@using Pampa.InSol.Biz.Seguridad
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+    ViewBag.Title = "CAPRI";
+}
+
+
+    <div class="row" style="display: flex; text-align: center;">
+        <div class="col-lg-6" style="margin: 0px auto; margin-top: 10%;">
+            @if (Request.HasPermission((int)Security.Funciones.Producto_ABM))
+            {
+                <div class="col-lg-6">
+                    <div class="panelLight panel panel-button">
+                        <div class="panel-heading">
+                            <div class="content-button">
+                                <i class="fa fa-user"></i>
+                                <p>Administración productos</p>
+                            </div>
+                        </div>
+                        <a href="@Url.Action("Editar", "Producto")">
+                            <div class="panel-footer">
+                                <span class="pull-left">Agregar</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+            @if (Request.HasPermission((int)Security.Funciones.Interfaz_ABM))
+            {
+                <div class="col-lg-6">
+                    <div class="panelLight panel panel-button">
+                        <div class="panel-heading">
+                            <div class="content-button">
+                                <i class="fa fa-user"></i>
+                                <p>Administración interfaz</p>
+                            </div>
+                        </div>
+                        <a href="@Url.Action("Editar", "Interfaz")">
+                            <div class="panel-footer">
+                                <span class="pull-left">Agregar</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+
+
+<style>
+    .vertical-center {
+        /*align-items: center;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;*/
+        /*display: flex;
+        align-items: center;
+        justify-content: center*/
+    }
+</style>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/insol/Home/Index.js")" type="text/javascript"></script>
+
+}

@@ -1,0 +1,92 @@
+.color{
+    .firstColor,
+    .secondColor,
+    .bodyColor,
+    .contentColor,
+    .seccionColor,
+    .headerSeccionColor{
+        width: 15px;
+        height: 15px;
+        border: 1px solid #ddd;
+    }
+}
+
+.firstColor{
+    background: $first-color;
+}
+.secondColor{
+    background: $second-color;
+}
+.bodyColor{
+    background: $bg-body;
+}
+.contentColor{
+    background: $bg-content;
+}
+.seccionColor{
+    background: $bg-seccion;
+}
+.headerSeccionColor{
+    background: $bg-header-seccion;
+}
+
+
+.buttonsUI{
+    .k-button{
+        margin:0!important;
+        float: none;
+    }
+    .btn-link{
+        padding:0;
+    }
+}
+
+.gridEstructure{
+      .grid {
+        background: #f0f3f8;
+        min-height: 90px;
+        text-align: center;
+    }
+
+    .grid-bootstrap {
+        display: table;
+        padding: 0;
+    }
+    .grid-bootstrap li {
+        display: table-cell;
+        vertical-align: middle;
+     }
+    .middle-gray {
+        background: #a5a5a5;
+    }
+}
+
+.prettyprint {
+    margin: 10px 0px;
+}
+.tag {
+    color: #905;
+}
+.atn {
+    color: #690;
+}
+.pun {
+    color: #999;
+}
+.atv {
+    color: #07a;
+}
+
+.filterContent{
+    .second-button{
+        float: right;
+    }
+}
+.divRadioButton {
+    height: 30px;
+}
+
+.contentUi{
+    margin:10px 0;
+    float: none!important;
+}

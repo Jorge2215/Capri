@@ -1,0 +1,130 @@
+﻿@using Pampa.InSol.Biz.Seguridad
+
+@{
+    ViewBag.Title = Pampa.InSol.Common.Recursos.General.TitleAdministracionUsuarios;
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li class="active">@Pampa.InSol.Common.Recursos.General.TitleAdministracionUsuarios</li>
+</ol>
+
+<h4>@Pampa.InSol.Common.Recursos.General.TitleAdministracionUsuarios</h4>
+<div id="filtrosUsuarios" class="bops-sections">
+    <button class="bnt-filter" type="button" data-toggle="collapse" data-target="#getTarimas"><strong>Filtros</strong></button>
+    <div id="getTarimas" class="collapse in">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="filterContent">
+                    <div class="k-content col-md-12 notPadding">
+                        <ul id="fieldlist">
+                            <li class="col-md-3 col-sm-6 col-xs-12">
+                                <label>Usuario:</label>
+                                @(Html.Kendo().TextBox()
+                                    .Name("Usuario")
+                                    .HtmlAttributes(new { @class = "form-width" })
+                                )
+                            </li>
+                            <li class="col-md-3 col-sm-6 col-xs-12">
+                                <label>Apellido:</label>
+                                @(Html.Kendo().TextBox()
+                                    .Name("Apellido")
+                                    .HtmlAttributes(new { @class = "form-width" })
+                                )
+                            </li>
+                            <li class="col-md-3 col-sm-6 col-xs-12">
+                                <label>Nombre:</label>
+                                @(Html.Kendo().TextBox()
+                                    .Name("Nombre")
+                                    .HtmlAttributes(new { @class = "form-width" })
+                                )
+                            </li>
+                            <li class="col-md-3 col-sm-6 col-xs-12">
+                                <label>Solo Activos:</label>
+                                <input type="checkbox" id="Activo" checked="checked"/>
+                            </li>
+                            <li class="col-md-4 col-sm-6 col-xs-12">
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="k-content btn-filter col-md-12">
+                        @if (Request.HasPermission((int)Security.Funciones.ABM_de_Usuario))
+                        {
+                            @Html.ActionLink(Pampa.InSol.Common.Recursos.General.TitleNuevoUsuario, "NuevoUsuario", null, new { @class = "k-button second-button" })
+                        }
+                        <a id="btnBuscar" class="k-button second-button"><i class="glyphicon glyphicon-search" aria-hidden="true"></i>Buscar</a>
+                        <a id="btnLimpiar" class="btnLink">Limpiar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="divUsuarios" class="bops-section-production">
+    <div>
+        @(Html.Kendo().Grid<Pampa.InSol.Entities.Models.UsuarioGrilla>()
+            .Name("gridUsuarios")
+            .Columns(columns =>
+            {
+                columns.Bound(c => c.Id)
+                    .Visible(false);
+                columns.Bound(c => c.Apellido);
+                columns.Bound(c => c.Nombre);
+                columns.Bound(c => c.UsuarioNT)
+                    .Title("Usuario de Red");
+                columns.Bound(c => c.Activo)
+                    .ClientTemplate("<input type='checkbox'  name='Activo' #= Activo? checked='checked' : '' # disabled='disabled' />");
+            })
+            @*.ToolBar(toolbar =>
+            {
+                toolbar.Template(@<div class="first-color ">
+                    <input type="button" name="name" value="Excel " class="k-button k-primary add-button excel k-grid-excel" />
+                </div>);
+            })*@
+            .Sortable()
+            .Selectable()
+            .AutoBind(false)
+            .Excel(excel => excel
+                .AllPages(true)
+                .Filterable(true)
+                .FileName(Pampa.InSol.Common.Recursos.General.TitleAdministracionUsuarios + ".xlsx")
+            )
+            .Events(events => 
+            {
+                if (Request.HasPermission((int)Security.Funciones.ABM_de_Usuario))
+                {
+                    events.Change("usuario.onSelectedRow");
+                }
+            })
+            .Pageable(pageable => pageable
+                .Numeric(false)
+                .Input(true)
+                .PreviousNext(true))
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Read(read => read.Action("Users_Read", "Usuario").Data("usuario.getFilters"))
+                .PageSize(10)
+            )
+            .NoRecords(Pampa.InSol.Common.Recursos.General.NoRecords)
+        )
+    </div>
+</div>
+
+<script>
+    $(function () {
+        usuario.init({
+            txtUsuario: '#Usuario',
+            txtNombre: '#Nombre',
+            txtApellido: '#Apellido',
+            Activo: '#Activo',
+            grid: '#gridUsuarios',
+            btnBuscar: '#btnBuscar',
+            btnLimpiar: '#btnLimpiar',
+
+            divUsuarios: '#divUsuarios',
+
+            urlEditarUsuario: '@Url.Action("Editar")',
+        })
+    })
+</script>
+@Scripts.Render("~/bundles/Usuario")

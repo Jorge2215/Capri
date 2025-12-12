@@ -1,0 +1,272 @@
+﻿@using Pampa.InSol.Biz.Seguridad
+
+@{
+    ViewBag.Title = Pampa.InSol.Common.Recursos.General.TitleAdminInterfaces;
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li class="active">@Pampa.InSol.Common.Recursos.General.TitleAdminInterfaces</li>
+</ol>
+
+<h4>@Pampa.InSol.Common.Recursos.General.TitleAdminInterfaces</h4>
+<div id="filtroInterfaces" class="bops-sections contentDark">
+    <div class="subtitles"></div>
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-lg-3 col-md-3 col-xs-12">
+            <div class="col-lg-3 col-md-3 col-xs-4">
+                <label>Nombre:</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-8">
+                @(Html.Kendo().TextBox()
+                            .Name("Nombre")
+                            .HtmlAttributes(new { @class = "form-width" })
+                )
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-xs-5">
+                <label>Ciclo Aplicativo:</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-8">
+                @(Html.Kendo().DropDownList()
+                            .Name("cicloAplicativoSelect")
+                            .HtmlAttributes(new { @class = "wide-full", style = "width: 100%" })
+                            .DataValueField("Id")
+                            .DataTextField("Descripcion")
+                            .Filter("contains")
+                            .ValuePrimitive(false)
+                            .DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetListItemCicloAplicativo", "CicloAplicativo");
+                                });
+                            })
+
+                )
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-xs-4">
+                <label>Prod. Origen:</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-8">
+                @(Html.Kendo().DropDownList()
+                            .Name("productoOrigenSelect")
+                            .HtmlAttributes(new { @class = "wide-full", style = "width: 100%" })
+                            .DataValueField("Id")
+                            .DataTextField("Descripcion")
+                            .Filter("contains")
+                            .ValuePrimitive(false)
+                            .DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetListItemProductos", "Producto");
+                                });
+                            })
+
+                )
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-xs-4">
+                <label>Mód. Origen:</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-8">
+                @(Html.Kendo().DropDownList()
+                            .Name("moduloOrigenSelect")
+                            .HtmlAttributes(new { @class = "wide-full", style = "width: 100%" })
+                            .DataValueField("Id")
+                            .DataTextField("Descripcion")
+                            .DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetListItemModulosByProductos", "Producto").Data("interfaz.filterModulosOrigen");
+                                })
+                                .ServerFiltering(true);
+                            })
+                            .Enable(false)
+                            .AutoBind(false)
+                            .CascadeFrom("productoOrigenSelect")
+                )
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-xs-12">
+            <div class="col-lg-3 col-md-3 col-xs-4">
+                <label>ID Interfaz:</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-8">
+                @(Html.Kendo().TextBox()
+                            .Name("IDInterfaz")
+                            .HtmlAttributes(new { @class = "form-width" })
+                )
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-xs-4">
+                <label>Activo:</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-8">
+                <input type="checkbox" id="Activo" checked="checked" />
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-xs-4">
+                <label>Prod. Destino:</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-8">
+                @(Html.Kendo().DropDownList()
+                            .Name("productoDestinoSelect")
+                            .HtmlAttributes(new { @class = "wide-full", style = "width: 100%" })
+                            .DataValueField("Id")
+                            .DataTextField("Descripcion")
+                            .Filter("contains")
+                            .ValuePrimitive(false)
+                            .DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetListItemProductos", "Producto");
+                                });
+                            })
+
+                )
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-xs-4">
+                <label>Mód. Destino:</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-8">
+                @(Html.Kendo().DropDownList()
+                             .Name("moduloDestinoSelect")
+                             .HtmlAttributes(new { @class = "wide-full", style = "width: 100%" })
+                             .DataValueField("Id")
+                             .DataTextField("Descripcion")
+                             .DataSource(source =>
+                             {
+                                 source.Read(read =>
+                                 {
+                                     read.Action("GetListItemModulosByProductos", "Producto").Data("interfaz.filterModulosDestino");
+                                 })
+                                 .ServerFiltering(true);
+                             })
+                             .Enable(false)
+                             .AutoBind(false)
+                             .CascadeFrom("productoDestinoSelect")
+                )
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div-btn" class="contentDark">
+    @if (Request.HasPermission((int)Security.Funciones.Interfaz_ABM)){
+        @Html.ActionLink(Pampa.InSol.Common.Recursos.General.TitleAdminInterfaceNew, "Editar", null, new { @class = "k-button second-button add-button k-primary" })
+    }
+    <a id="btnBuscar" class="k-button second-button"><i class="glyphicon glyphicon-search" aria-hidden="true"></i>Buscar</a>
+    <a id="btnLimpiar" class="k-button second-button">Limpiar</a>
+</div>
+
+<div id="divInterfaces" class="contentLight">
+    <div>
+        @(Html.Kendo().Grid<Pampa.InSol.Entities.Models.InterfazModel>()
+                .Name("gridInterfaces")
+                .Columns(columns =>
+                {
+                    columns.Bound(c => c.Id).Title("Id");
+                    columns.Bound(c => c.Nombre).Filterable(ftb => ftb.Multi(true).Search(true));
+                    columns.Bound(c => c.CicloAplicativoDisplay).Title("Ciclo Aplicativo").Filterable(ftb => ftb.Multi(true).Search(true));
+                    columns.Bound(c => c.TipoDatoDisplay).Title("Tipo Dato").Filterable(ftb => ftb.Multi(true).Search(true));
+                    columns.Bound(c => c.ProductoOrigenDisplay).Title("Prod. Origen").Filterable(ftb => ftb.Multi(true).Search(true));
+                    columns.Bound(c => c.ModuloOrigenDisplay).Title("Módulo Origen").Filterable(ftb => ftb.Multi(true).Search(true));
+                    columns.Bound(c => c.ProductoDestinoDisplay).Title("Prod. Destino").Filterable(ftb => ftb.Multi(true).Search(true));
+                    columns.Bound(c => c.ModuloDestinoDisplay).Title("Módulo Destino").Filterable(ftb => ftb.Multi(true).Search(true));
+                    columns.Bound(c => c.Activo).ClientTemplate("<input type='checkbox'  name='Activo' #= Activo? checked='checked' : '' # disabled='disabled' />");
+                    if (Request.HasPermission((int)Security.Funciones.Interfaz_ABM))
+                    {
+                        columns.Template(e => { }).ClientTemplate("#= changeEstadoTemplate(data) #").Width(72);
+                    }
+                })
+                .ToolBar(toolbar =>
+                {
+                toolbar.Template(@<div class="first-color ">
+                        <input type="button" name="name" value="Exportar a Excel " class="k-button k-primary add-button excel k-grid-excel" />
+                    </div>);
+                    })
+                    .Sortable()
+                    .Filterable()
+                    .AutoBind(false)
+                    .Excel(excel => excel
+                        .AllPages(true)
+                        .Filterable(true)
+                        .FileName(Pampa.InSol.Common.Recursos.General.TitleAdminProducts + ".xlsx")
+                    )
+                    .Pageable(pageable => pageable
+                        .Numeric(false)
+                        .Input(true)
+                        .PreviousNext(true))
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Read(read => read.Action("Interfaces_Read", "Interfaz").Data("interfaz.getFilters"))
+                        .PageSize(10)
+                    )
+                    .NoRecords(Pampa.InSol.Common.Recursos.General.NoRecords)
+        )
+    </div>
+</div>
+
+<style>
+    #cicloAplicativoSelect,
+    #productoOrigenSelect,
+    #moduloOrigenSelect,
+    #productoDestinoSelect,
+    #moduloDestinoSelect {
+        max-width: 100%;
+    }
+</style>
+<script id="changeEstadoTemplate" type="text/x-kendo-template">
+    <a class='k-button second-button' href='@Url.Content("~/Interfaz/Editar/#= Id #")' style='float: left;'>
+        <i class='glyphicon glyphicon-pencil'></i>
+    </a>
+    <button class='k-button second-button' onclick='interfaz.deleteInterfaz("#= Id #")'>
+        # if (data.Activo == true) { #
+        <i class='glyphicon glyphicon-trash'></i>
+        # } else { #
+        <i class='glyphicon glyphicon-eye-open'></i>
+        # } #
+    </button>
+</script>
+<script>
+    var changeEstadoTemplate = kendo.template($('#changeEstadoTemplate').html());
+</script>
+
+<script>
+    $(function () {
+        interfaz.init({
+            txtNombre: '#Nombre',
+            selCicloAplicativo: '#cicloAplicativoSelect',
+            selProductoOrigen: '#productoOrigenSelect',
+            selModuloOrigen: '#moduloOrigenSelect',
+            txtIDInterfaz: '#IDInterfaz',
+            selProductoDestino: '#productoDestinoSelect',
+            selModuloDestino: '#moduloDestinoSelect',
+            chkActivo: '#Activo',
+
+            btnBuscar: '#btnBuscar',
+            btnLimpiar: '#btnLimpiar',
+
+            divInterfaz: '#divInterfaces',
+            gridInterfaz: '#gridInterfaces',
+
+            urlEditarInterfaz: '@Url.Action("Editar")',
+            urlDeleteInterfaz: '@Url.Action("Delete")',
+        })
+    })
+</script>
+@Scripts.Render("~/bundles/Interfaz")
+

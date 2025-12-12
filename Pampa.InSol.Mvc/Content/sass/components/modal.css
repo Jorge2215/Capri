@@ -1,0 +1,65 @@
+/*
+Error: Undefined variable: "$alert-color".
+        on line 36 of C:\dev\nati\TOM\Main\TOM\Pampa.InSol.Mvc\Content\sass\components\modal.scss
+
+31: 
+32: 
+33: #warning_wnd_title,
+34: #confirmation_wnd_title{
+35:     background: #f5f5f5;
+36:     color:$alert-color;
+37:     border-bottom: 1px solid $alert-border;
+38:     padding: 13px 15px 0 15px;
+39:     height: 35px;
+40:     top: 0;
+41:     left: 0;
+
+Backtrace:
+C:\dev\nati\TOM\Main\TOM\Pampa.InSol.Mvc\Content\sass\components\modal.scss:36
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/script/tree/variable.rb:49:in `_perform'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/script/tree/node.rb:50:in `perform'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:384:in `visit_prop'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/stack.rb:79:in `block in with_base'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/stack.rb:115:in `with_frame'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/stack.rb:79:in `with_base'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:420:in `block (2 levels) in visit_rule'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:420:in `map'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:420:in `block in visit_rule'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:418:in `visit_rule'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/stack.rb:79:in `block in with_base'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/stack.rb:115:in `with_frame'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/stack.rb:79:in `with_base'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/base.rb:52:in `map'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:157:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/visitors/perform.rb:8:in `visit'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/root_node.rb:36:in `css_tree'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/engine.rb:368:in `_render_with_sourcemap'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/engine.rb:285:in `render_with_sourcemap'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/exec/sass_scss.rb:375:in `run'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/exec/sass_scss.rb:62:in `process_result'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/exec/base.rb:40:in `parse'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/lib/sass/exec/base.rb:19:in `parse!'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.4.3/bin/sass:13:in `<top (required)>'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/bin/sass:19:in `load'
+C:/Users/nridella/AppData/Local/Temp/Mindscape/WebWorkbench/Ruby193/Ruby193/bin/sass:19:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined variable: \"$alert-color\".\A         on line 36 of C:\dev\nati\TOM\Main\TOM\Pampa.InSol.Mvc\Content\sass\components\modal.scss\A \A 31: \A 32: \A 33: #warning_wnd_title,\A 34: #confirmation_wnd_title{\A 35:     background: #f5f5f5;\A 36:     color:$alert-color;\A 37:     border-bottom: 1px solid $alert-border;\A 38:     padding: 13px 15px 0 15px;\A 39:     height: 35px;\A 40:     top: 0;\A 41:     left: 0;"; }

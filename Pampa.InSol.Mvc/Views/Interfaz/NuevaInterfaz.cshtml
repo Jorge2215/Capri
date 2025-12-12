@@ -1,0 +1,455 @@
+﻿@using Pampa.InSol.Biz.Seguridad
+@model Pampa.InSol.Entities.Models.InterfazModel
+
+@{
+    if (Model.Id == 0)
+    {
+        ViewBag.Title = Pampa.InSol.Common.Recursos.General.TitleAdminInterfaceNew;
+    }
+    else
+    {
+        ViewBag.Title = Pampa.InSol.Common.Recursos.General.TitleAdminInterfaceEdit;
+    }
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@if (Model.Id == 0)
+{
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink(Pampa.InSol.Common.Recursos.General.TitleAdminInterfaceConsult, "Index", "Interfaz")</li>
+        <li class="active">@Pampa.InSol.Common.Recursos.General.TitleAdminInterfaceNew</li>
+    </ol>
+
+    <h4>@Pampa.InSol.Common.Recursos.General.TitleAdminInterfaceNew</h4>
+}
+else
+{
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink(Pampa.InSol.Common.Recursos.General.TitleAdminInterfaceConsult, "Index", "Interfaz")</li>
+        <li class="active">@Pampa.InSol.Common.Recursos.General.TitleAdminInterfaceEdit</li>
+    </ol>
+
+    <h4>@Pampa.InSol.Common.Recursos.General.TitleAdminInterfaceEdit</h4>
+}
+
+<div id="iterfazForm" class="bops-sections contentLight">
+    <div class="subtitles"></div>
+    <div class="row" style="margin-bottom: 5px">
+        <div class="col-lg-6 col-md-6 col-xs-12">
+            <div class="col-lg-2 col-md-2 col-xs-4">
+                <label>ID Producto:</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-xs-12">
+                @(Html.Kendo().TextBox().Name("IDInterfaz").Value(Model.Id.ToString()).HtmlAttributes(new { required = true, readOnly = true })
+                )
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-xs-12">
+            <div class="col-lg-2 col-md-2 col-xs-4">
+                <label>Dato:</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-xs-12">
+                @(Html.Kendo().TextBox().Name("Dato").Value(Model.Dato).HtmlAttributes(new { required = true, style = "width: 100%" })
+                )
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 5px">
+        <div class="col-lg-6 col-md-6 col-xs-12">
+            <div class="col-lg-2 col-md-2 col-xs-4">
+                <label>Nombre:</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-xs-12">
+                @(Html.Kendo().TextBox().Name("Nombre").Value(Model.Nombre).HtmlAttributes(new { required = true, style = "width: 100%" })
+                )
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-xs-12">
+            <div class="col-lg-2 col-md-2 col-xs-4">
+                <label>Tipo Dato:</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-xs-12">
+                @(Html.Kendo().DropDownListFor(c => c.TipoDatoId)
+                            .Name("selTipoDato")
+                            .HtmlAttributes(new { @class = "wide-full", style = "width: 100%" })
+                            .DataValueField("Id")
+                            .DataTextField("Descripcion")
+                            .Filter("contains")
+                            .ValuePrimitive(false)
+                            .DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetListItemTipoDato", "TipoDato");
+                                });
+                            })
+                )
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 5px">
+        <div class="col-lg-6 col-md-6 col-xs-12">
+            <div class="col-lg-2 col-md-2 col-xs-4">
+                <label>Ciclo Aplicativo:</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-xs-12">
+                @(Html.Kendo().DropDownListFor(c => c.CicloAplicativoId)
+                            .Name("selCicloAplicativo")
+                            .HtmlAttributes(new { @class = "wide-full", style = "width: 100%" })
+                            .DataValueField("Id")
+                            .DataTextField("Descripcion")
+                            .Filter("contains")
+                            .ValuePrimitive(false)
+                            .DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetListItemCicloAplicativo", "CicloAplicativo");
+                                });
+                            })
+                )
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-xs-12">
+            <div class="col-lg-2 col-md-2 col-xs-4">
+                <label>Frecuencia:</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-xs-12">
+                @(Html.Kendo().DropDownListFor(c => c.FrecuenciaId)
+                            .Name("selFrecuencia")
+                            .HtmlAttributes(new { @class = "wide-full", style = "width: 100%" })
+                            .DataValueField("Id")
+                            .DataTextField("Descripcion")
+                            .Filter("contains")
+                            .ValuePrimitive(false)
+                            .DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetListItemFrecuencia", "Frecuencia");
+                                });
+                            })
+                )
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-xs-12">
+            <div class="col-lg-2 col-md-2 col-xs-4">
+                <label>Tipo Interfaz:</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-xs-12">
+                @(Html.Kendo().DropDownListFor(c => c.TipoInterfazId)
+                            .Name("selTipoInterfaz")
+                            .HtmlAttributes(new { @class = "wide-full", style = "width: 100%" })
+                            .DataValueField("Id")
+                            .DataTextField("Descripcion")
+                            .Filter("contains")
+                            .ValuePrimitive(false)
+                            .DataSource(source =>
+                            {
+                                source.Read(read =>
+                                {
+                                    read.Action("GetListItemTipoInterfaz", "TipoInterfaz");
+                                });
+                            })
+                )
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-xs-12">
+            <div class="col-lg-2 col-md-2 col-xs-4">
+                <label>Activo:</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-xs-12">
+                @(Html.Kendo().Switch().Name("Activo").Checked(Model.Activo).Messages(c => c.Checked("Si").Unchecked("No"))
+                )
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bops-sections contentLight">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="contentGroup">
+                <h5><strong>ORIGEN</strong></h5>
+                <div class="row" style="margin-bottom: 10px">
+                    <div class="col-lg-2 col-md-2 col-xs-4">
+                        <label>Producto:</label>
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-xs-10">
+                        @(Html.Kendo().DropDownListFor(c => c.IdProductoOrigen)
+                                                    .Name("selProductoOrigen")
+                                                    .HtmlAttributes(new { @class = "wide-full", style = "width: 100%", required = "required" })
+                                                    .DataValueField("Id")
+                                                    .DataTextField("Descripcion")
+                                                    .Filter("contains")
+                                                    .ValuePrimitive(false)
+                                                    .DataSource(source =>
+                                                    {
+                                                        source.Read(read =>
+                                                        {
+                                                            read.Action("GetListItemProductos", "Producto");
+                                                        });
+                                                    })
+                        )
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px">
+                    <div class="col-lg-2 col-md-2 col-xs-4">
+                        <label>Módulo:</label>
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-xs-10">
+                        @(Html.Kendo().DropDownListFor(c => c.IdModuloOrigen)
+                                                    .Name("selModuloOrigen")
+                                                    .HtmlAttributes(new { @class = "wide-full", style = "width: 100%" })
+                                                    .DataValueField("Id")
+                                                    .DataTextField("Descripcion")
+                                                    .DataSource(source =>
+                                                    {
+                                                        source.Read(read =>
+                                                        {
+                                                            read.Action("GetListItemModulosByProductos", "Producto").Data("newInterfaz.filterModulosOrigen");
+                                                        })
+                                                        .ServerFiltering(true);
+                                                    })
+                                                    .Enable(false)
+                                                    .AutoBind(false)
+                                                    .CascadeFrom("selProductoOrigen")
+                        )
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4" style="padding-left: 0px; padding-right: 0px;">
+            <div class="contentGroup">
+                <h5><strong>INTERFAZ</strong></h5>
+                <div class="row" style="margin-bottom: 10px">
+                    <div class="col-lg-2 col-md-2 col-xs-4">
+                        <label>Tecnología:</label>
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-xs-10">
+                        @(Html.Kendo().DropDownListFor(c => c.TecnologiaId)
+                                                            .Name("selTecnologia")
+                                                            .HtmlAttributes(new { @class = "wide-full", style = "width: 100%" })
+                                                            .DataValueField("Id")
+                                                            .DataTextField("Descripcion")
+                                                            .Filter("contains")
+                                                            .ValuePrimitive(false)
+                                                            .DataSource(source =>
+                                                            {
+                                                                source.Read(read =>
+                                                                {
+                                                                    read.Action("GetListItemTecnologia", "Tecnologia");
+                                                                });
+                                                            })
+                        )
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px">
+                    <div class="col-lg-2 col-md-2 col-xs-4">
+                        <label>Transporte:</label>
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-xs-10">
+                        @(Html.Kendo().DropDownListFor(c => c.TransporteId)
+                                                            .Name("selTransporte")
+                                                            .HtmlAttributes(new { @class = "wide-full", style = "width: 100%" })
+                                                            .DataValueField("Id")
+                                                            .DataTextField("Descripcion")
+                                                            .Filter("contains")
+                                                            .ValuePrimitive(false)
+                                                            .DataSource(source =>
+                                                            {
+                                                                source.Read(read =>
+                                                                {
+                                                                    read.Action("GetListItemTransporte", "Transporte");
+                                                                });
+                                                            })
+                        )
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="contentGroup">
+                <h5><strong>DESTINO</strong></h5>
+                <div class="row" style="margin-bottom: 10px">
+                    <div class="col-lg-2 col-md-2 col-xs-4">
+                        <label>Producto:</label>
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-xs-10">
+                        @(Html.Kendo().DropDownListFor(c => c.IdProductoDestino)
+                                                            .Name("selProductoDestino")
+                                                            .HtmlAttributes(new { @class = "wide-full", style = "width: 100%", required = "required" })
+                                                            .DataValueField("Id")
+                                                            .DataTextField("Descripcion")
+                                                            .Filter("contains")
+                                                            .ValuePrimitive(false)
+                                                            .DataSource(source =>
+                                                            {
+                                                                source.Read(read =>
+                                                                {
+                                                                    read.Action("GetListItemProductos", "Producto");
+                                                                });
+                                                            })
+                        )
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px">
+                    <div class="col-lg-2 col-md-2 col-xs-4">
+                        <label>Módulo:</label>
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-xs-10">
+                        @(Html.Kendo().DropDownListFor(c => c.IdModuloDestino)
+                                                    .Name("selModuloDestino")
+                                                    .HtmlAttributes(new { @class = "wide-full", style = "width: 100%" })
+                                                    .DataValueField("Id")
+                                                    .DataTextField("Descripcion")
+                                                    .DataSource(source =>
+                                                    {
+                                                        source.Read(read =>
+                                                        {
+                                                            read.Action("GetListItemModulosByProductos", "Producto").Data("newInterfaz.filterModulosDestino");
+                                                        })
+                                                        .ServerFiltering(true);
+                                                    })
+                                                    .Enable(false)
+                                                    .AutoBind(false)
+                                                    .CascadeFrom("selProductoDestino")
+                        )
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="divBitacoraGrid" class="bops-sections contentLight">
+    <div class="col-lg-12">
+        <div class="row" style="margin-bottom: 5px">
+            <label>Comentarios</label>
+            <input id="btnAddComentario" type="button" class="k-button second-button add-button k-primary" value="Nuevo Comentario" />
+        </div>
+        <div class="row">
+            @(Html.Kendo().Grid<Pampa.InSol.Entities.Models.BitacoraInterfazModel>()
+                        .Name("gridBitacora")
+                        .Columns(columns =>
+                        {
+                            columns.Bound(c => c.Fecha).Title("Fecha").Format("{0:dd/MM/yyyy}").Width(120);
+                            columns.Bound(c => c.Usuario).Title("Usuario").Width(200);
+                            columns.Bound(c => c.Comentario).Title("Comentario");
+                            columns.Template(e => { }).ClientTemplate("#= changeEstadoTemplate(data) #").Width(37);
+                        })
+                        .Sortable()
+                        .Selectable()
+                        //.Resizable(x => x.Columns(true))
+                        .Scrollable()
+                        .AutoBind(true)
+                        .Filterable()
+                        .Pageable(pageable => pageable
+                            .Numeric(false)
+                            //.PreviousNext(true)
+                            .Input(true)
+                        )
+                        .DataSource(dataSource => dataSource
+                                .Ajax()
+                                .Read(read => read.Action("GetBitacora", "Interfaz", new { idInterfaz = Model.Id }).Data("newInterfaz.getListaBitacora"))
+                                .PageSize(10)
+                        )
+                        .NoRecords(Pampa.InSol.Common.Recursos.General.NoRecords)
+            )
+        </div>
+    </div>
+</div>
+
+@Html.Partial("popupAgregarComentario")
+
+<div id="divButtons" class="bops-sections contentLight">
+    <input id="btnGuardar" type="button" class="k-button second-button add-button k-primary" value="Guardar" />
+    @Html.ActionLink("Volver", "Index", null, new { @class = "k-button second-button" })
+</div>
+
+<style>
+    #Dato,
+    #Nombre,
+    #selTipoDato,
+    #selCicloAplicativo,
+    #selFrecuencia,
+    #selTipoInterfaz,
+    #selProductoOrigen,
+    #selTecnologia,
+    #selProductoDestino,
+    #selModuloOrigen,
+    #selTransporte,
+    #selModuloDestino {
+        max-width: 100%;
+    }
+
+    .k-grid .k-grid-content {
+        overflow-y: auto;
+    }
+
+    .marginLeftLabel {
+        margin-left: 15px;
+    }
+
+    .contentGroup {
+        margin-top: 10px;
+        background: #E0E0E0;
+        border: 1px solid #D0D0D0;
+        padding: 15px;
+        border-radius: 4px;
+    }
+</style>
+
+<script id="changeEstadoTemplate" type="text/x-kendo-template">
+    <button class='k-button second-button' onclick='newInterfaz.eliminarComentario("#= Comentario #", "#= Id #", @Model.Id)'>
+        <i class='glyphicon glyphicon-trash'></i>
+    </button>
+</script>
+<script>
+    var changeEstadoTemplate = kendo.template($('#changeEstadoTemplate').html());
+</script>
+<script>
+
+    $(function () {
+        newInterfaz.init({
+            IDInterfaz: @Model.Id,
+            txtDato: '#Dato',
+            txtNombre: '#Nombre',
+            selTipoDato: '#selTipoDato',
+            selCicloAplicativo: '#selCicloAplicativo',
+            selFrecuencia: '#selFrecuencia',
+            selTipoInterfaz: '#selTipoInterfaz',
+            chkActivo: '#Activo',
+            selProductoOrigen: '#selProductoOrigen',
+            selTecnologia: '#selTecnologia',
+            selProductoDestino: '#selProductoDestino',
+            selModuloOrigen: '#selModuloOrigen',
+            selTransporte: '#selTransporte',
+            selModuloDestino: '#selModuloDestino',
+
+            usuarioActualId: @Html.Raw(Json.Encode(ViewBag.UsuarioActualId)),
+            usuarioActual: '@Security.FullNameCurrentUser',
+
+            listaBitacoraExistente: @Html.Raw(Json.Encode(ViewBag.listaBitacora)),
+
+            btnAddComentario: '#btnAddComentario',
+            gridBitacora: '#gridBitacora',
+
+            popupAgregarComentario: '#popupAgregarComentario',
+            txtComentario: '#Comentario',
+            btnAgregarPopupAgregarComentario: '#btnAgregarPopupAgregarComentario',
+            btnCerrarPopupAgregarComentario: '#btnCerrarPopupAgregarComentario',
+
+            btnGuardar: '#btnGuardar',
+
+            urlSaveInterfaz: '@Url.Action("Save")',
+            urlIndexInterfaz: '@Url.Action("Index")',
+            urlDeleteComentarioRelacionado: '@Url.Action("DeleteComentarioRelacionado")'
+        })
+    })
+</script>
+@Scripts.Render("~/bundles/NuevaInterfaz")

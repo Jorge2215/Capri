@@ -1,0 +1,83 @@
+
+.k-button{
+    &.k-primary.add-button{
+        background:$first-color;
+        color: #FFF;
+        border-radius: 2px;
+        padding: 5px 12px;
+        border: 1px solid $first-color;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+        &:hover{
+            background: $second-color;
+            border: 1px solid $second-color;
+        }
+        &:focus{
+            box-shadow: 0 0 3px 0 $first-color!important;
+        }
+    }
+    &.second-button{
+        background: $second-button;
+        color: #FFF;
+        border-radius: 2px;
+        padding: 5px 12px;
+        border: 1px solid $second-button;
+        margin: 0;
+        float: right;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+        &:hover{
+            background:$second-hover;
+            color: white;
+            border: 1px solid #808080;
+        }
+        &:focus{
+            background-image:none;
+            box-shadow: 0 0 3px 0 $first-color!important;
+        }
+        &:active {
+            background-color: $second-button!important;
+            border-color: $second-button!important;
+}
+        .glyphicon-search{
+            font-size: 12px;
+            margin-right: 5px;
+        }
+    }
+    &.btn-link{
+        line-height: 1.72em;
+        padding: 5px 12px;
+        height: 36px;
+        margin: 0 15px;
+        background:none;
+        font-weight: normal;
+        color: #428bca;
+        cursor: pointer;
+        border-radius: 0;
+        border:none;
+        &:hover {
+            background: none;
+            color: #5393BF;
+        }
+        &:focus {
+           box-shadow:none!important;
+        }
+        &:active {
+            color: #5393BF;
+            border:none!important;
+            background:none!important;
+            text-decoration: underline;
+        }
+    }
+
+}
+
+.btnLink{
+    float: right;
+    line-height: 1.72em;
+    padding: 5px 12px;
+    height: 36px;
+    margin: 0 15px;
+    color: #428bca;
+}
+.btn-block {
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}

@@ -1,0 +1,44 @@
+.k-menu-horizontal .k-icon{
+    background-image: url("../kendo/2016.2.504/Black/sprite.png");
+}
+
+.k-link.k-state-active .k-icon{
+    background-image: url("../kendo/2016.2.504/Silver/sprite.png");
+}
+
+.k-menu{
+    &.k-header{
+        border: none;
+        border-left: 1px solid #D0D0D0;
+        background: $second-color;
+        color:#FFF;
+    }
+    .k-item, 
+    .k-widget.k-menu-horizontal > .k-item{
+        border-right: 1px solid #D0D0D0;
+    }
+    .k-state-hover>.k-link{
+        color: #1B1B1B !important;
+        background-color: #D6D6D6 !important;
+    }
+}
+
+.linkCategory .k-link{
+    color:#FFF!important;
+    text-decoration: none;
+}
+.linkCategory.k-state-highlight .k-link{
+    color: #505968 !important;
+    text-decoration: none;
+}
+
+.k-menu-horizontal .k-animation-container{
+   top: 32px!important;
+}
+.k-menu-horizontal .k-group.k-menu-group.k-popup.k-reset{
+    min-width:120px;
+}
+
+.menuChild{
+    background:#eaeaea;
+}

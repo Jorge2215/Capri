@@ -1,0 +1,49 @@
+﻿@using Pampa.InSol.Biz.Recursos;
+@using Pampa.InSol.Common.Recursos;
+@using System.Configuration;
+
+<script type="text/javascript">
+    var page = {
+        titles: {
+            titleUsuario: '@Html.Raw(General.TitleAdministracionUsuarios)',
+            titleRol: '@Html.Raw(General.TitleAdministracionRoles)',
+        },
+        messages: {
+            genericError: '@Html.Raw(ErrorMessages.GenericError)',
+            noHayRegistros: '@Html.Raw(General.NoRecords)',
+        },
+        notification_types: {
+            Success: "Success",
+            Error: "Error",
+            Alert: "Alert",
+            Info: "Info"
+        }
+    };
+    var constants = {
+        disabled_class: "k-state-disabled",
+        green_row_class: 'alert alert-success',
+        primary_btn: 'k-primary',
+        invalidClass: 'k-invalid',
+        selected_row_class: 'k-state-selected',
+        kendo_alt_class: 'k-alt',
+        class_check_terminado: 'terminado',
+        readonly_class: "readonly",
+        string_empty: '',
+        comboValue: null,
+        roundDecimals: 3,
+        etiqueta_div: '#etiqueta',
+    };
+
+    //resources.messages
+    var resources = {
+        messages: {
+            noHayRegistros: '@Html.Raw(General.NoRecords)',
+            camposObligatorios: '@Html.Raw(BusinessValidationMessages.MandatoryFields)',
+            successSave: '@Html.Raw(BusinessValidationMessages.SuccessSave)',
+            userADValidation: '@Html.Raw(BusinessValidationMessages.UserADValidation)',
+        },
+        errors: {
+            genericError: '@Html.Raw(ErrorMessages.GenericError)',
+        }
+    };
+</script>

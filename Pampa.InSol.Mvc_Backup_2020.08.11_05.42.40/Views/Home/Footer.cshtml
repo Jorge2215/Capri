@@ -1,0 +1,31 @@
+﻿@model string
+<footer>
+    <div class="container">
+        
+        @Html.ActionLink("TOM", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) 
+        <span class="version">&copy; @DateTime.Now.Year Versión @Model</span>
+        <a href="#" class="scrollToTop" style="display: block;" title="Subir"><span class="k-icon k-i-arrow-n"></span></a>
+    </div>
+    
+</footer>
+
+<script>
+    $(document).ready(function () {
+        $('.scrollToTop').fadeOut();
+        //Check to see if the window is top if not then display button
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('.scrollToTop').fadeIn();
+            } else {
+                $('.scrollToTop').fadeOut();
+            }
+        });
+
+        //Click event to scroll to top
+        $('.scrollToTop').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 800);
+            return false;
+        });
+
+    });
+</script>

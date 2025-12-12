@@ -1,0 +1,173 @@
+﻿@using Pampa.InSol.Biz.Seguridad
+
+@{
+    ViewBag.Title = Pampa.InSol.Common.Recursos.General.TitleAdminProducts;
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li class="active">@Pampa.InSol.Common.Recursos.General.TitleAdminProducts</li>
+</ol>
+
+<h4>@Pampa.InSol.Common.Recursos.General.TitleAdminProducts</h4>
+<div id="filtroProductos" class="bops-sections contentDark">
+    <div class="subtitles"></div>
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-lg-4 col-md-4 col-xs-12">
+            <div class="col-lg-3 col-md-3 col-xs-4">
+                <label>Nombre:</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-8">
+                @(Html.Kendo().TextBox()
+                                    .Name("Nombre")
+                                    .HtmlAttributes(new { @class = "form-width" })
+                )
+            </div>
+        </div>     
+        <div class="col-lg-3 col-md-3 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-xs-5">
+                <label>Ciclo Aplicativo:</label>
+            </div>
+            <div class="col-lg-7 col-md-7 col-xs-7">
+                @(Html.Kendo().DropDownList()
+                    .Name("cicloAplicativoSelect")
+                    .HtmlAttributes(new { @class = "wide-full" })
+                    .DataValueField("Id")
+                    .DataTextField("Descripcion")
+                    .Filter("contains")
+                    .ValuePrimitive(false)
+                    .DataSource(source =>
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("GetListItemCicloAplicativo", "CicloAplicativo");
+                        });
+                    })
+
+                )
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-xs-12">
+            <div class="col-lg-3 col-md-3 col-xs-4">
+                <label>ID Producto:</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-8">
+                @(Html.Kendo().TextBox()
+                                    .Name("IDProducto")
+                                    .HtmlAttributes(new { @class = "form-width" })
+                )
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-xs-4">
+                <label>Activo:</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-8">
+                <input type="checkbox" id="Activo" checked="checked" />
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div-btn" class="contentDark">
+    @if (Request.HasPermission((int)Security.Funciones.Interfaz_ABM)){
+        @Html.ActionLink(Pampa.InSol.Common.Recursos.General.TitleAdminProductNew, "Editar", null, new { @class = "k-button second-button add-button k-primary" })
+    }
+    <a id="btnBuscar" class="k-button second-button"><i class="glyphicon glyphicon-search" aria-hidden="true"></i>Buscar</a>
+    <a id="btnLimpiar" class="k-button second-button">Limpiar</a>
+</div>
+
+<div id="divProductos" class="contentLight">
+    <div>
+        @(Html.Kendo().Grid<Pampa.InSol.Entities.Models.ProductoModel>()
+            .Name("gridProductos")
+            .Columns(columns =>
+            {
+                columns.Bound(c => c.Id).Title("Id");
+                columns.Bound(c => c.Nombre).Filterable(ftb => ftb.Multi(true).Search(true));
+                columns.Bound(c => c.TipoProductoDisplay).Title("Tipo");
+                columns.Bound(c => c.CicloAplicativoDisplay).Title("Ciclo Aplicativo").Filterable(ftb => ftb.Multi(true).Search(true));
+                columns.Bound(c => c.ProcesosDisplay).Title("Proceso");//.Filterable(ftb => ftb.Multi(true).Search(true));
+                columns.Bound(c => c.NegociosDisplay).Title("Negocio");//.Filterable(ftb => ftb.Multi(true).Search(true));
+                columns.Bound(c => c.Activo).ClientTemplate("<input type='checkbox'  name='Activo' #= Activo? checked='checked' : '' # disabled='disabled' />");
+                if (Request.HasPermission((int)Security.Funciones.Producto_ABM))
+                {
+                    columns.Template(e => { }).ClientTemplate("#= changeEstadoTemplate(data) #").Width(72);
+                }
+                if (Request.HasPermission((int)Security.Funciones.Consulta_Productos))
+                {
+                    columns.Template(e => { }).ClientTemplate("#= visualizarProducto(data) #").Width(72);
+                }
+            })
+            .ToolBar(toolbar =>
+            {
+            toolbar.Template(@<div class="first-color ">
+                    <input type="button" name="name" value="Exportar a Excel " class="k-button k-primary add-button excel k-grid-excel" />
+                </div>);
+                })
+                    .Sortable()
+                    .Filterable()
+                    .AutoBind(false)
+                    .Excel(excel => excel
+                        .AllPages(true)
+                        .Filterable(true)
+                        .FileName(Pampa.InSol.Common.Recursos.General.TitleAdminProducts + ".xlsx")
+                    )
+                    .Pageable(pageable => pageable
+                        .Numeric(false)
+                        .Input(true)
+                        .PreviousNext(true))
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Read(read => read.Action("Productos_Read", "Producto").Data("producto.getFilters"))
+                        .PageSize(10)
+                    )
+                    .NoRecords(Pampa.InSol.Common.Recursos.General.NoRecords)
+        )
+    </div>
+</div>
+<script id="changeEstadoTemplate" type="text/x-kendo-template">
+    <a class='k-button second-button' href='@Url.Content("~/Producto/Editar/#= Id #")' style='float: left;'>
+        <i class='glyphicon glyphicon-pencil'></i>
+    </a>
+    <button class='k-button second-button' onclick='producto.deleteProducto("#= Id #")'>
+        # if (data.Activo == true) { #
+        <i class='glyphicon glyphicon-trash'></i>
+        # } else { #
+        <i class='glyphicon glyphicon-eye-open'></i>
+        # } #
+    </button>
+</script>
+<script id="visualizarProducto" type="text/x-kendo-template">
+    <a class='k-button second-button' href='@Url.Content("~/Producto/Editar/#= Id #")' style='float: left;'>
+        <i class='glyphicon glyphicon-eye-open'></i>
+    </a>
+</script>
+<script>
+    var visualizarProducto = kendo.template($('#visualizarProducto').html());
+</script>
+<script>
+    var changeEstadoTemplate = kendo.template($('#changeEstadoTemplate').html());
+</script>
+
+<script>
+    $(function () {
+        producto.init({
+            txtNombre: '#Nombre',
+            selCicloAdaptativo: '#cicloAplicativoSelect',
+            txtIDProducto: '#IDProducto',
+            chkActivo: '#Activo',
+
+            btnBuscar: '#btnBuscar',
+            btnLimpiar: '#btnLimpiar',
+
+            divProductos: '#divProductos',
+            gridProductos: '#gridProductos',
+
+            urlEditarProducto: '@Url.Action("Editar")',
+            urlDeleteProducto: '@Url.Action("Delete")',
+        })
+    })
+</script>
+@Scripts.Render("~/bundles/Producto")

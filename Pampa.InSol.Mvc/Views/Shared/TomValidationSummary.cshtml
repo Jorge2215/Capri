@@ -1,0 +1,17 @@
+﻿@if (!Html.ViewData.ModelState.IsValid)
+{
+    <div id="summaryTOM" class="demo-section k-content">
+        <div class="k-widget k-notification k-notification-errorStyle" data-role="alert" style="display: block; opacity: 1;">
+            <div class="k-notification-wrap">
+                <span class="k-icon k-i-note">errorStyle</span>
+                <ul>
+                    @foreach (var modelError in Html.ViewData.ModelState.SelectMany(keyValuePair => keyValuePair.Value.Errors))
+                    {
+                        <li>@modelError.ErrorMessage</li>
+                    }
+                </ul>
+                <span class="k-icon k-i-close">Hide</span>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,56 @@
+﻿@(Html.Kendo().Window()
+                        .Name("popupListaInterfaces")
+                        .Title("Interfaces")
+                        .Visible(false)
+                        .Modal(true)
+                        .Content(@<text>
+                            <div class="modal-body">
+                                <div class="contentLight row col-lg-12">
+                                    <div id="divInterfaces" class="bops-section-production">
+                                        @(Html.Kendo().Grid<Pampa.InSol.Entities.Models.InterfazModel>()
+                                        .Name("gridInterfaces")
+                                        .Columns(columns =>
+                                        {
+                                            columns.Bound(c => c.Id).Title("Id").Width(55);
+                                            columns.Bound(c => c.Nombre).Filterable(ftb => ftb.Multi(true).Search(true));
+                                            columns.Bound(c => c.InOut).Title("IN/OUT").Width(95).Filterable(ftb => ftb.Multi(true).Search(true));
+                                            columns.Bound(c => c.ProductoOrigenDisplay).Title("Prod. Origen").Filterable(ftb => ftb.Multi(true).Search(true));
+                                            columns.Bound(c => c.ModuloOrigenDisplay).Title("Módulo Origen").Filterable(ftb => ftb.Multi(true).Search(true));
+                                            columns.Bound(c => c.ProductoDestinoDisplay).Title("Prod. Destino").Filterable(ftb => ftb.Multi(true).Search(true));
+                                            columns.Bound(c => c.ModuloDestinoDisplay).Title("Módulo Destino").Filterable(ftb => ftb.Multi(true).Search(true));
+                                            columns.Bound(c => c.TipoDatoDisplay).Title("Tipo Dato").Filterable(ftb => ftb.Multi(true).Search(true));
+                                            columns.Bound(c => c.FrecuenciaDisplay).Title("Frecuencia").Filterable(ftb => ftb.Multi(true).Search(true));
+                                            columns.Bound(c => c.TipoInterfazDisplay).Title("Tipo Interfaz").Filterable(ftb => ftb.Multi(true).Search(true));
+                                        })
+                                    .Sortable()
+                                    .Scrollable()
+                                    .Filterable()
+                                    .Resizable(x => x.Columns(true))
+                                    .AutoBind(false)
+                                    .Excel(excel => excel
+                                        .AllPages(true)
+                                        .Filterable(true)
+                                        .FileName(Pampa.InSol.Common.Recursos.General.TitleAdminProducts + ".xlsx")
+                                    )
+                                    .Pageable(pageable => pageable
+                                        .Numeric(false)
+                                        .Input(true)
+                                        .PreviousNext(true))
+                                    .DataSource(dataSource => dataSource
+                                        .Ajax()
+                                        .Read(read => read.Action("InterfacesByProducto_Read", "Interfaz").Data("newProducto.getFilterIdProducto"))
+                                        .PageSize(10)
+                                    )
+                                    .NoRecords(Pampa.InSol.Common.Recursos.General.NoRecords)
+                                        )
+                                    </div>
+                                </div>
+                                <div class="contentLight row col-lg-12">
+                                    <input id="btnCerrarPopupListaInterfaces" type="button" class="right k-button k-primary second-button" value="Cerrar" />
+                                </div>
+                            </div>
+                        </text>)
+                                     .Draggable()
+                                     .Width(1200)
+                                     .Actions(actions => actions.Close())
+)

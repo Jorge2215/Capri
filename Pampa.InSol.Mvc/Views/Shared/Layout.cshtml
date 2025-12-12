@@ -1,0 +1,146 @@
+﻿@using Pampa.InSol.Biz.Seguridad
+@using Pampa.InSol.Common.Recursos
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/font-awesome/css/font-awesome.min.css">
+    @Html.Partial("Utils")
+    <link href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.common.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/kendo/2016.2.504/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/kendo")
+    @Scripts.Render("~/bundles/insol")
+
+    @{var current_user = Request.CurrentUser();}
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="container-fluid navbar-container">
+                <div class="navbar-header">
+
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="contentLogo">
+                        <a href='@Url.Action("Index", "Home")'>
+                            <img src="~/Content/img/pampa_energia.jpg" />
+                        </a>
+                        |
+                        @Html.ActionLink("CAPRI", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
+                    @if (current_user != null)
+                    {
+                    <div class="logo-right">
+                        <p class="nav navbar-text">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            @(current_user.Nombre + " " + current_user.Apellido)<br />
+                        </p>
+                    </div>
+                    }
+                </div>
+
+            </div>
+
+        </div>
+        <div class="navbar navbar-inverse">
+            <div class="container">
+                @(Html.Kendo().Menu()
+                    .Name("Menu")
+                    .Items(items =>
+                    {
+                        items.Add().Text("Productos").Items(child =>
+                        {
+                            if (Request.HasPermission((int)Security.Funciones.Producto_ABM)) {
+                                child.Add().Text(General.TitleAdminProductNew).Action("Editar", "Producto", new { id = 0 });
+                            }
+                            if (Request.HasPermission((int)Security.Funciones.Consulta_Productos)) {
+                                child.Add().Text(General.TitleAdminProductConsult).Action("Index", "Producto");
+                            }
+                        });
+
+                        items.Add().Text("Interfaces").Items(child =>
+                        {
+                            if (Request.HasPermission((int)Security.Funciones.Interfaz_ABM))
+                            {
+                                child.Add().Text(General.TitleAdminInterfaceNew).Action("Editar", "Interfaz", new { id = 0 });
+                            }
+                            if (Request.HasPermission((int)Security.Funciones.Consulta_Interfaces))
+                            {
+                                child.Add().Text(General.TitleAdminInterfaceConsult).Action("Index", "Interfaz");
+                            }
+                        });
+
+                        if (Request.HasPermission((int)Security.Funciones.Seguridad))
+                        {
+                            items.Add().Text("Seguridad").Items(child =>
+                            {
+                                if (Request.HasPermission((int)Security.Funciones.Consulta_Usuarios))
+                                {
+                                    child.Add().Text(General.TitleAdministracionUsuarios).Action("Index", "Usuario");
+                                }
+                                if (Request.HasPermission((int)Security.Funciones.Consulta_de_Roles))
+                                {
+                                    child.Add().Text(General.TitleAdministracionRoles).Action("Index", "RolFunciones");
+                                }
+                            });
+                        }
+                    })
+                )
+            </div>
+        </div>
+        <div class="nav-collapse collapse">
+            <ul class="nav">
+                <li>
+                    <a href="#">Seguridad</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    @(Html.Kendo().Notification()
+            .Name("popupNotification")
+            .Position(p => p.Pinned(false).Top(30).Right(30))
+            .Stacking(NotificationStackingSettings.Down)
+            .Templates(t =>
+            {
+                t.Add().Type("success").ClientTemplateID("successTemplate");
+                t.Add().Type("error").ClientTemplateID("errorTemplate");
+                t.Add().Type("alert").ClientTemplateID("alertTemplate");
+                t.Add().Type("info").ClientTemplateID("infoTemplate");
+            })
+    )
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @Html.Action("Footer", "Home")
+
+    @Html.Partial("NotificationAlert")
+
+    @Html.Partial("NotificationInfo")
+
+    @Html.Partial("NotificationSuccess")
+
+    @Html.Partial("NotificationError")
+
+    @Html.Partial("ModalContainer")
+
+    @Html.Partial("ConfirmationModal")
+
+    @Html.Partial("WarningModal")
+
+    @RenderSection("scripts", required: false)
+
+    @Html.Partial("LoadingSpinner")
+
+</body>
+</html>

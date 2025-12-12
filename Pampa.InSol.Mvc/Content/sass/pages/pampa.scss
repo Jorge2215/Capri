@@ -1,0 +1,248 @@
+.left {
+	float: left;
+}
+
+
+html{
+	overflow-y: scroll;
+}
+
+.button-home {
+	padding: 30px;
+	height: 150px;
+}
+
+.k-slider-track{
+	background-color: white;
+}
+
+.content-dark{
+	background: #E0E0E0;
+}
+
+.pampa-section-production{
+	&.content-dark{
+		@extend .content-dark;
+		margin-bottom: 2%;
+	}
+
+	.align-center{
+		text-align:center;
+	}
+
+	.subtitles{
+		color: $font-blue-color;
+		padding-left: 1%;
+		padding-top: 0.5%;
+	}
+
+	.row{
+		margin-bottom: 1%;
+	}
+
+	position: relative;
+	min-height: 1px;
+	margin-right: 15px;
+	
+	div{
+		.reports-grid{
+			overflow-x:auto !important;
+		}
+	}
+}
+
+.pampa-sections{
+	@extend .pampa-section-production;
+
+	.subtitles{
+		padding-bottom: 2%;
+	}
+
+	padding-bottom: 1%;
+}
+
+.k-grid{
+	font-size:14px;
+
+	.programas-grid{
+		font-size:14px;
+		overflow-x:auto;
+	}
+	.reports-grid{
+		overflow-x:auto !important;
+	}
+}
+
+.btn-grid{
+	color: black;
+	padding: inherit;
+}
+
+.btn-grid[disabled]{
+	pointer-events: none;
+	cursor: not-allowed;
+	opacity: 0.65;
+	filter: alpha(opacity=65);
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.numeric-field{
+	text-align: right;
+}
+
+.contentLight div{
+	.reports-grid{
+		overflow-x:auto !important;
+	}
+}
+
+.k-input{
+	padding: 0;
+}
+//Armado Tarimas
+
+table{
+	//table-layout: fixed;
+	overflow-x:auto !important;
+}
+
+#crearTarimas{
+	margin-left: -15px;
+	margin-right: -15px;
+}
+
+#divSummaryCtrl{
+	position: fixed;
+	margin-top: 3%;
+	width: inherit;
+	margin-left: -15px;
+	padding-left: 15px;
+	margin-right: -15px;
+	padding-right: 15px;
+	text-align: center;
+}
+
+#divSummary{
+	text-align: center;
+	padding-right: 2%;
+}
+
+#tarimaGrid{
+	min-height: 58px;
+
+	.k-grid-header{
+		height: 27px;
+
+		.k-header{
+			height: 15px;
+			padding-bottom: 10px;
+		}
+	}
+}
+
+input[disabled].alert-success {
+			color: #468847;
+			background-color: #dff0d8;
+			border-color: #d6e9c6;
+}
+#excel{
+	float: left;
+	margin-left: 2%;
+	}
+
+ul.k-reset.k-slider-items{
+	margin-right: 34px;
+}
+
+#produccionJumbo{
+	div{
+		#btnGuardar{
+			width: 100%;
+		}
+		input{
+			max-width: 100%;
+		}
+	}    
+	[class^=col]{
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.col-lg-1{
+		padding-left: 15px;
+		/*padding-right: 15px;*/
+	}
+	.col-lg-2{
+		&.second-col{
+			width: 13.5%;
+		}
+		
+		&.label{
+			width: 10%;
+			text-align: left;
+			padding-left: 1%;
+
+			&.first-col{
+				margin-left:2%;
+			}
+		}
+
+		&.label-last-col{
+			width: 10%;
+			text-align: left;
+			padding-left: 1.6%;
+		}
+	}
+	
+	#div-btn{
+		padding-top: 1%;
+	}
+
+	/*.jumbo-date-field{
+		padding-right: 3%;
+	}*/
+	/*.second-row-fields{
+		margin-left:-3%;
+	}*/
+}
+
+input.k-button.second-button, a.k-button.second-button{
+	margin-left: 1%;
+}
+
+.pesada-bobinas-fields{
+    padding-left: 0px;
+    padding-right: 0px;
+
+    .col-lg-8{
+        margin-bottom: 1.91%;
+    }
+}
+
+#txtPeso{
+	height: 60px;
+	font-size: xx-large;
+}
+
+/* USUARIOS */
+.listbox{
+	min-width: 100%;
+}
+
+#gridReporte.k-grid td{
+	line-height: 1.6em;
+}
+
+.wo{
+	max-width: 120px;
+	width: 120px;
+}
+.wo input.k-textbox{
+	width: 120px;
+}
+
+.dashboard{
+	height: auto !important;
+	text-align: center;
+	margin: inherit;
+}

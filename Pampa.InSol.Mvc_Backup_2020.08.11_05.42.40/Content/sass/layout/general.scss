@@ -1,0 +1,167 @@
+// estilos generales
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 42px;
+    background: $bg-body;
+}
+
+.notPadding {
+    padding: 0;
+}
+
+a {
+    color: #6E9EBF;
+
+    &:hover {
+        color: #5393BF;
+    }
+}
+
+.p15 {
+    padding: 0 15px;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+.right {
+    float: right;
+}
+
+// Set padding to keep content from hitting the edges
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    @media (max-width:$screen-mobile-max) {
+        padding-bottom: 15px;
+    }
+}
+
+// Override the default bootstrap behavior where horizontal description lists will truncate terms that are too long to fit in the left column
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+// Set width on the form input elements since they're 100% wide by default
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+// Tipografia
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 22px;
+    margin: 0;
+}
+
+h3 {
+    font-size: 20px;
+    margin-top: 8px;
+    margin-bottom: 0;
+
+    &.titlePage {
+        margin-top: 8px;
+        margin-bottom: 0;
+    }
+}
+
+label {
+    color: #515967;
+    margin: 0;
+    font-size: 12px;
+}
+
+.k-radio-label {
+    font-weight: normal;
+    font-size: 12px;
+}
+
+// Body content
+.body-content {
+    margin-top: 95px;
+}
+
+.breadcrumb {
+    padding: 0;
+    background: $bg-body;
+    font-size: 12px;
+    margin-bottom: 0;
+}
+
+.contentLight {
+    padding: 15px;
+    background: $bg-content;
+    border: 1px solid #dedee0;
+    border-radius: 4px;
+    float: left;
+    width: 100%;
+}
+
+.contentDark {
+    margin-top: 10px;
+    background: $bg-seccion;
+    border: 1px solid #D0D0D0;
+    float: left;
+    width: 100%;
+    padding: 15px;
+    border-radius: 4px;
+
+    .title {
+        color: #515967;
+        margin: 0 0 5px 0;
+    }
+}
+
+.contentUser {
+    margin-top: 8px;
+}
+
+.k-grid tbody .k-button, .k-ie8 .k-grid tbody button.k-button {
+    min-width: 10px !important;
+    width: 24px !important;
+    height: 24px !important;
+    padding: 2px 2px 2px 2px !important;
+}
+
+.grilla-columna-fecha {
+    text-align: center;
+}
+
+.grilla-columna-texto {
+    text-align: left;
+}
+
+.grilla-columna-texto-centrado {
+    text-align: center;
+}
+
+.grilla-columna-numero {
+    text-align: right;
+}
+
+.clicleable {
+    cursor: pointer;
+    font-size: 12px;
+    z-index: 1;
+    color: black;
+}
+/* Correcciones*/
+.contenedorCorreccionOpeEntidad {
+    margin-top: 10px;
+}
+
+.btnCalculado {
+    background: #A1D38A !important;
+}
+

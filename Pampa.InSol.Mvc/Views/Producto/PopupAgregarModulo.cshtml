@@ -1,0 +1,44 @@
+﻿@(Html.Kendo().Window()
+                    .Name("popupAgregarModulo")
+                    .Title("Módulo")
+                    .Visible(false)
+                    .Modal(true)
+                    .Content(@<text>
+                        <div class="modal-body">
+                            <div class="contentLight row col-lg-12">
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-lg-3 col-md-3 col-xs-4">
+                                        <label>Nombre:</label>
+                                    </div>
+                                    <div class="col-lg-9 col-md-9 col-xs-8">
+                                        <input id="IdModulo" type="hidden" value="" /> <!--Prueba-->
+                                        @(Html.Kendo().TextBox().Name("ModuloNombre").HtmlAttributes(new { required = true, style = "width: 100%" })
+                                        )
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-bottom: 5px">
+                                    <div class="col-lg-3 col-md-3 col-xs-4">
+                                        <label>Descripción:</label>
+                                    </div>
+                                    <div class="col-lg-9 col-md-9 col-xs-8">
+                                        @(Html.Kendo().TextBox().Name("ModuloDescripcion").HtmlAttributes(new { required = true, style = "width: 100%" })
+                                        )
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contentLight row col-lg-12">
+                                <input id="btnCerrarPopupAgregarModulo" type="button" class="right k-button k-primary second-button" value="Cerrar" />
+                                <input id="btnAgregarPopupAgregarModulo" type="button"  class="right k-button k-primary add-button" value="Agregar" />
+                            </div>
+                        </div>
+                        <style>
+                            #ModuloNombre, #ModuloDescripcion {
+                                max-width: 100%;
+                            }
+                        </style>
+                    </text>)
+                         .Draggable()
+                         .Width(600)
+                         .Actions(actions => actions.Close())
+)
+

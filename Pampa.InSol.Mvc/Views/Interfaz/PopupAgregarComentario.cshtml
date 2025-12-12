@@ -1,0 +1,25 @@
+﻿@(Html.Kendo().Window()
+                        .Name("popupAgregarComentario")
+                        .Title("Comentario")
+                        .Visible(false)
+                        .Modal(true)
+                        .Content(@<text>
+                            <div class="modal-body">
+                                <div class="contentLight row col-lg-12">
+                                    @Html.TextArea("Comentario", "", new { @class = "k-textarea k-input-inner", rows = "15", style = "width: 100%;" })
+                                </div>
+                                <div class="contentLight row col-lg-12">
+                                    <input id="btnCerrarPopupAgregarComentario" type="button" class="right k-button k-primary second-button" value="Cerrar" />
+                                    <input id="btnAgregarPopupAgregarComentario" type="button" class="right k-button k-primary add-button" value="Agregar" />
+                                </div>
+                            </div>
+                            <style>
+                                #Comentario {
+                                    max-width: 100%;
+                                }
+                            </style>
+                        </text>)
+                                     .Draggable()
+                                     .Width(600)
+                                     .Actions(actions => actions.Close())
+)

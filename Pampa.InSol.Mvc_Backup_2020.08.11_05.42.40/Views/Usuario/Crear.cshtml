@@ -1,0 +1,97 @@
+﻿@model Pampa.InSol.Entities.Usuario
+
+@{
+    ViewBag.Title = "Nuevo usuario";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Seguridad</a></li>
+        <li><a href="#">Administración de usuarios</a></li>
+        <li class="active">Nuevo usuario</li>
+    </ol>
+
+    <h3 class="titlePage">Nuevo usuario</h3>
+    <div class="row">
+        <div class="col-md-12 contentUser">
+            <fieldset>
+                @Html.Hidden("CreadoPor", ContextoUsuarioActual.Current.UserName)
+                @Html.Hidden("ModificadoPor", ContextoUsuarioActual.Current.UserName)
+                <div class="contentLight">
+                    <div class="row">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.UsuarioNT)
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-style" })
+                            @Html.ValidationMessageFor(model => model.Nombre)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Nombre)
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-style" })
+                            @Html.ValidationMessageFor(model => model.Nombre)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Apellido)
+                            @Html.TextBoxFor(model => model.Apellido, new { @class = "form-style" })
+                            @Html.ValidationMessageFor(model => model.Apellido)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Activo)
+                            @Html.TextBoxFor(model => model.Activo, new { @class = "form-style" })
+                            @Html.ValidationMessageFor(model => model.Activo)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="btn-Operation">
+                            @(Html.Kendo().Button()
+                            .Name("btnGrabar")
+                            .HtmlAttributes(new
+                            {
+                                type = "submit",
+                                @class = "k-button k-primary add-button right",
+                            })
+                            .Content("<span class='glyphicon glyphicon-floppy-disk'></span> Grabar")
+
+                            )
+
+                            @Html.ActionLink("Cancelar", "Index", "Usuario", null, new { @class = "btn k-button btn-link right" })
+
+                           </div>
+                        </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $(function () {
+        $('#UsuarioNT').blur(function () { //Consulta los datos del usuairo en el Active Directory
+            var name = $('#UsuarioNT').val();
+            var returnVal = false;
+            $.ajax({
+                url: "@Url.Content("~/Usuario/ConsultaUsuarioAD/")" + name,
+                type: 'GET',
+                cache: false,
+            }).done(function (data) {
+                if (data.success == false) {
+                    showErrorNotification("No se pudieron conseguir los datos del AD");
+                }
+                else {
+                    $('#Nombre').val(data.Nombre);
+                    $('#Apellido').val(data.Apellido);
+                    showSuccessNotification('Nuevo usuario', 'Se obtuvieron los datos del AD');
+                }
+            });
+
+            return returnVal;
+        });
+    })
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

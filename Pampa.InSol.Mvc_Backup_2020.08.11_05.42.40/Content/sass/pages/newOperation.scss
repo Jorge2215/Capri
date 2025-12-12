@@ -1,0 +1,65 @@
+.newOperation{
+    .btnEstimation{
+        float: left;
+        .second-button{
+            float: left;
+            padding: 5px 8px;
+            margin-top: 14px!important;
+            @media (max-width:$screen-mobile-max) {
+                width: auto;
+            }
+        }
+    }
+    .second-button {
+        margin-top: 14px;
+        margin-bottom: 8px;
+        @media (max-width:$screen-mobile-max){
+            width: 100%;
+            margin-top: 4px!important;
+            margin-bottom: 6px;
+        } 
+    }
+    &.contentLight{
+        div{
+            height: 50px;
+        }
+    }
+        .table-responsive{
+        float: left;
+        width: 100%;
+    }
+    .table-head{
+        thead {
+            background:$bg-seccion;
+        }
+        th{
+            border: 1px solid #ceced2;
+            border-bottom-width: 1px;
+        }
+        label {
+            color: #535b6a;
+            font-weight: 400;
+        }
+    }
+    .table {
+        margin-bottom: 0;
+    }
+}
+.colGrid,
+.colGrid div{
+    height:auto!important;
+}
+
+.btn-Operation{
+    float: right;
+    margin: 10px 0;
+}
+
+#datosMedicion_Inicial,
+#datosMedicion_Final{
+    td{
+        padding: 4px;
+        background:#FFF;
+        height: 25px;
+    }
+}

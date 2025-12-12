@@ -1,0 +1,31 @@
+﻿@model Pampa.InSol.Entities.Models.SelectRolModel
+
+<div class="row">
+    <h5 class="col-md-12 col-xs-12 list-box-titles"><strong>Roles del Usuario</strong></h5>
+</div>
+<div class="row">
+    <h5 class="col-md-6 partial-header left-title">Roles Disponibles</h5>
+    <h5 class="col-md-5 col-md-offset-1">Roles Seleccionados</h5>
+</div>
+<div class="row">
+    <div class="col-lg-5 col-md-5 col-xs-5 pampa-list-width">
+        @Html.ListBox("listDisponiblesLeft", Model.RolesDisponibles, new { id = "rolesDisponibles", @class = "listbox", Multiple = "multiple", Size = 10 })
+    </div>
+    <div class="col-md-1 col-md-offset-1 col-xs-2 pampa-list-btn-width">
+        <div class="row">
+            <button type="button" id="btnAddRolesList" class="k-button add-button k-primary">></button>
+        </div>
+        <div class="row">
+            <button type="button" id="btnAddAllRolesList" class="k-button add-button k-primary">>></button>
+        </div>
+        <div class="row">
+            <button type="button" id="btnRemoveAllRolesList" class="k-button add-button k-primary"><<</button>
+        </div>
+        <div class="row">
+            <button type="button" id="btnRemoveRolesList" class="k-button add-button k-primary"><</button>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-xs-5 pampa-list-width">
+        @Html.ListBox("listRelacionesRight", Model.RolesAsignados, new { id = "rolesRelacionados", @class = "listbox", Multiple = "multiple", Size = 10 })
+    </div>
+</div>

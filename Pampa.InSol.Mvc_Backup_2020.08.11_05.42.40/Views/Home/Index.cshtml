@@ -1,0 +1,128 @@
+﻿@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+    ViewBag.Title = "TOM";
+}
+
+<div class="row">
+    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="panelLight panel panel-button">
+                    <div class="panel-heading">
+                        <div class="content-button">
+                            <i class="fa fa-user"></i>
+                            <p>Administración usuarios</p>
+                        </div>
+                    </div>
+                    <a href="@Url.Action("Crear", "Usuario")">
+                        <div class="panel-footer">
+                            <span class="pull-left">Agregar</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="demo-section k-content wide home">
+                    @(Html.Kendo().Chart()
+        .Name("chart")
+        .Title("Muestra Grafico")
+        .Legend(legend => legend
+            .Position(ChartLegendPosition.Top)
+        )
+        .ChartArea(chartArea => chartArea
+            .Background("transparent")
+        )
+        .Series(series =>
+        {
+            series.Column(new double[] { 3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 9.552, 6.855 }).Name("Producto 1");
+            series.Column(new double[] { 4.743, 7.295, 7.175, 6.376, 8.153, 8.535, 5.247, 4.3, 4.3 }).Name("Producto 2");
+            series.Column(new double[] { 0.010, 1.375, 1.161, 0.684, 3.7, 3.269, 1.083, 3.690, 2.995 }).Name("Producto 3");
+            series.Column(new double[] { 1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, 4.339, 2.727 }).Name("Producto 4");
+        })
+        .CategoryAxis(axis => axis
+            .Name("series-axis")
+            .Line(line => line.Visible(false))
+        )
+        .CategoryAxis(axis => axis
+            .Name("label-axis")
+            .Categories("2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011")
+        )
+        .ValueAxis(axis => axis
+            .Numeric()
+                .Labels(labels => labels.Format("{0}%"))
+
+                // Move the label-axis all the way down the value axis
+                .AxisCrossingValue(0, int.MinValue)
+        )
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Format("{0}%")
+            .Template("#= series.name #: #= value #")
+        )
+                    )
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-bell fa-fw"></i> Notificaciones
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body content-text-home">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <p class="date">22/06/2016</p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit ...
+                            </a>
+                        </div>
+                        <!-- /.list-group -->
+                        <div class="panel-btn">
+                            <a href="#" class="btn btn-default btn-block">Ver más</a>
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-history"></i> Historial
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body content-text-home">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <p class="date">22/06/2016</p>
+                                <p class="titleSection">Nueva Medición</p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit ...
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <p class="date">22/06/2016</p>
+                                <p class="titleSection">Nueva Operación</p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit ...
+                            </a>
+                        </div>
+                        <!-- /.list-group -->
+                        <div class="panel-btn">
+                            <a href="#" class="btn btn-default btn-block">Ver más</a>
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/TOM/Home/Index.js")" type="text/javascript"></script>
+
+}
